@@ -15,6 +15,9 @@ namespace KilobitCup
 		private GraphicsDeviceManager graphics;
 		private SpriteBatch spriteBatch;
 
+		/// <summary>
+		/// Constructs the class.
+		/// </summary>
 		public MainGame()
 		{
 			graphics = new GraphicsDeviceManager(this)
@@ -24,6 +27,7 @@ namespace KilobitCup
 			};
 
 			Content.RootDirectory = "Content";
+			Window.Title = "Kilobit Cup";
 			IsMouseVisible = true;
 		}
 
