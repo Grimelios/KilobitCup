@@ -1,0 +1,9 @@
+# Files
+*.Cache
+*.user
+
+# Folders
+.vs
+bin
+obj
+packages
