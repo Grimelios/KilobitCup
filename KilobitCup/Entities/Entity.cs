@@ -17,7 +17,7 @@ namespace KilobitCup.Entities
 		/// <summary>
 		/// Entity position.
 		/// </summary>
-		public Vector2 Position { get; set; }
+		public virtual Vector2 Position { get; set; }
 
 		/// <summary>
 		/// Updates the entity.

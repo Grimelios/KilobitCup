@@ -1,4 +1,5 @@
 ﻿using KilobitCup.Core;
+using KilobitCup.Entities;
 using KilobitCup.Twitch;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -68,8 +69,15 @@ namespace KilobitCup
 		protected override void Draw(GameTime gameTime)
 		{
 			GraphicsDevice.Clear(Color.Black);
+
+			MouseState mouseState = Mouse.GetState();
+			ScrollingMessage message = new ScrollingMessage("text cheer1 one cheer2 two")
+			{
+				Position = new Vector2(mouseState.X, mouseState.Y)
+			};
 			
 			spriteBatch.Begin();
+			message.Draw(spriteBatch);
 			spriteBatch.End();
 		}
 	}

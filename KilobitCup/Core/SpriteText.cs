@@ -35,6 +35,11 @@ namespace KilobitCup.Core
 		}
 
 		/// <summary>
+		/// Returns current text width.
+		/// </summary>
+		public float Width => font.MeasureString(value).X;
+
+		/// <summary>
 		/// Draws the text.
 		/// </summary>
 		public override void Draw(SpriteBatch sb)
