@@ -1,5 +1,7 @@
-﻿using KilobitCup.Core;
+﻿using FarseerPhysics.Dynamics;
+using KilobitCup.Core;
 using KilobitCup.Entities;
+using KilobitCup.Physics;
 using KilobitCup.Twitch;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -14,10 +16,12 @@ namespace KilobitCup
 	{
 		private const int DefaultWidth = 400;
 		private const int DefaultHeight = 300;
+		private const int Gravity = 25;
 
 		private GraphicsDeviceManager graphics;
 		private SpriteBatch spriteBatch;
 		private BitListener bitListener;
+		private PhysicsAccumulator accumulator;
 
 		/// <summary>
 		/// Constructs the class.
@@ -40,9 +44,13 @@ namespace KilobitCup
 		/// </summary>
 		protected override void Initialize()
 		{
+			World world = new World(new Vector2(0, Gravity));
+
 			ContentLoader.Initialize(Content);
+			PhysicsFactory.Initialize(world);
 
 			bitListener = new BitListener();
+			accumulator = new PhysicsAccumulator(world);
 
 			base.Initialize();
 		}
@@ -60,6 +68,9 @@ namespace KilobitCup
 		/// </summary>
 		protected override void Update(GameTime gameTime)
 		{
+			float dt = (float)gameTime.ElapsedGameTime.Milliseconds / 1000;
+
+			accumulator.Update(dt);
 		}
 
 		/// <summary>
@@ -70,7 +81,7 @@ namespace KilobitCup
 			GraphicsDevice.Clear(Color.Black);
 
 			MouseState mouseState = Mouse.GetState();
-			ScrollingMessage message = new ScrollingMessage("hello cheer1 one cheer000001 two")
+			ScrollingMessage message = new ScrollingMessage("My name is Lucidus16 cheer100 and I'm super rich kappa1000")
 			{
 				Position = new Vector2(mouseState.X, mouseState.Y)
 			};
