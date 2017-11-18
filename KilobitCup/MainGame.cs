@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using KilobitCup.Twitch;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -14,6 +15,7 @@ namespace KilobitCup
 
 		private GraphicsDeviceManager graphics;
 		private SpriteBatch spriteBatch;
+		private BitListener bitListener;
 
 		/// <summary>
 		/// Constructs the class.
@@ -28,6 +30,7 @@ namespace KilobitCup
 
 			Content.RootDirectory = "Content";
 			Window.Title = "Kilobit Cup";
+			Window.Position = new Point(200);
 			IsMouseVisible = true;
 		}
 
@@ -36,6 +39,8 @@ namespace KilobitCup
 		/// </summary>
 		protected override void Initialize()
 		{
+			bitListener = new BitListener();
+
 			base.Initialize();
 		}
 
