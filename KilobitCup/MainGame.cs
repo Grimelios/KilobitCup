@@ -70,11 +70,11 @@ namespace KilobitCup
 			GraphicsDevice.Clear(Color.Black);
 
 			MouseState mouseState = Mouse.GetState();
-			ScrollingMessage message = new ScrollingMessage("cheer1 one cheer000001 two")
+			ScrollingMessage message = new ScrollingMessage("hello cheer1 one cheer000001 two")
 			{
 				Position = new Vector2(mouseState.X, mouseState.Y)
 			};
-			
+
 			spriteBatch.Begin();
 			message.Draw(spriteBatch);
 			spriteBatch.End();

@@ -35,7 +35,7 @@ namespace KilobitCup.Entities
 		private static int minimumKeywordLength = CheerKeywords.Min(k => k.Length) + 1;
 
 		private List<SpriteText> textList;
-		private List<Sprite> spriteList;
+		private List<Cheer> cheerList;
 		private List<Vector2> offsetList;
 
 		private bool textFirst;
@@ -46,7 +46,7 @@ namespace KilobitCup.Entities
 		public ScrollingMessage(string message)
 		{
 			textList = new List<SpriteText>();
-			spriteList = new List<Sprite>();
+			cheerList = new List<Cheer>();
 			offsetList = new List<Vector2>();
 
 			ComputeTokens(message);
@@ -67,9 +67,9 @@ namespace KilobitCup.Entities
 					textList[i].Position = value + offsetList[i * 2 + (1 - indexCorrection)];
 				}
 
-				for (int i = 0; i < spriteList.Count; i++)
+				for (int i = 0; i < cheerList.Count; i++)
 				{
-					spriteList[i].Position = value + offsetList[i * 2 + indexCorrection];
+					cheerList[i].Position = value + offsetList[i * 2 + indexCorrection];
 				}
 			}
 		}
@@ -121,7 +121,7 @@ namespace KilobitCup.Entities
 				if (TryParseCheer(message, i, out cheerLength, out bitValue) && bitValue > 0)
 				{
 					cheerIndex = i;
-					spriteList.Add(new Sprite("Kappa"));
+					cheerList.Add(new Cheer(bitValue));
 
 					return true;
 				}
@@ -175,11 +175,11 @@ namespace KilobitCup.Entities
 			Vector2 offset = Vector2.Zero;
 			offsetList.Add(offset);
 
-			for (int i = 0; i < textList.Count + spriteList.Count - 1; i++)
+			for (int i = 0; i < textList.Count + cheerList.Count - 1; i++)
 			{
 				bool isTextItem = textFirst ? i % 2 == 0 : i % 2 == 1;
 
-				offset.X += isTextItem ? textList[i].Width : 18;//spriteList[i].Width;
+				offset.X += isTextItem ? textList[i / 2].Width : cheerList[i / 2].Width;
 				offsetList.Add(offset);
 			}
 		}
@@ -197,7 +197,7 @@ namespace KilobitCup.Entities
 		public override void Draw(SpriteBatch sb)
 		{
 			textList.ForEach(t => t.Draw(sb));
-			spriteList.ForEach(s => s.Draw(sb));
+			cheerList.ForEach(s => s.Draw(sb));
 		}
 	}
 }
