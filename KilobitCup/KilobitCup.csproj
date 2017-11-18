@@ -45,6 +45,7 @@
     <Compile Include="Core\Component2D.cs" />
     <Compile Include="Core\Sprite.cs" />
     <Compile Include="Core\SpriteText.cs" />
+    <Compile Include="Entities\Cheer.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\ScrollingMessage.cs" />
     <Compile Include="Extensions.cs" />
