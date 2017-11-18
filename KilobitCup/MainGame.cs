@@ -1,4 +1,5 @@
-﻿using KilobitCup.Twitch;
+﻿using KilobitCup.Core;
+using KilobitCup.Twitch;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -39,6 +40,8 @@ namespace KilobitCup
 		/// </summary>
 		protected override void Initialize()
 		{
+			ContentLoader.Initialize(Content);
+
 			bitListener = new BitListener();
 
 			base.Initialize();
@@ -64,7 +67,10 @@ namespace KilobitCup
 		/// </summary>
 		protected override void Draw(GameTime gameTime)
 		{
-			GraphicsDevice.Clear(Color.CornflowerBlue);
+			GraphicsDevice.Clear(Color.Black);
+			
+			spriteBatch.Begin();
+			spriteBatch.End();
 		}
 	}
 }

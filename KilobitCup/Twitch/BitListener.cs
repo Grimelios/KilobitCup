@@ -41,6 +41,8 @@ namespace KilobitCup.Twitch
 		{
 			string userID = await GetID("https://api.twitch.tv/kraken/channels/grimelios", "Kilobit_Secret");
 
+			return;
+
 			channelID = await GetID("https://api.twitch.tv/kraken/channel", "Twitch_OAuth");
 
 			JObject dataObject = new JObject

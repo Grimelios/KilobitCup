@@ -41,6 +41,17 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ContentLoader.cs" />
+    <Compile Include="Core\Component2D.cs" />
+    <Compile Include="Core\Sprite.cs" />
+    <Compile Include="Core\SpriteText.cs" />
+    <Compile Include="Entities\Entity.cs" />
+    <Compile Include="Entities\ScrollingMessage.cs" />
+    <Compile Include="Interfaces\IColorable.cs" />
+    <Compile Include="Interfaces\IDynamic.cs" />
+    <Compile Include="Interfaces\IPositionable.cs" />
+    <Compile Include="Interfaces\IRenderable.cs" />
+    <Compile Include="Interfaces\IRotatable.cs" />
     <Compile Include="MainGame.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -67,6 +78,7 @@
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="app.manifest" />
+    <None Include="Content\Fonts\Default.spritefont" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -75,9 +87,7 @@
       <Name>Farseer</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Entities\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
