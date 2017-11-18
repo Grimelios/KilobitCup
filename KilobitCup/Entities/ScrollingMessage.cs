@@ -116,21 +116,52 @@ namespace KilobitCup.Entities
 		{
 			for (int i = index; i < message.Length - minimumKeywordLength; i++)
 			{
-				foreach (string keyword in CheerKeywords)
+				int bitValue;
+
+				if (TryParseCheer(message, i, out cheerLength, out bitValue) && bitValue > 0)
 				{
-					if (message.ContainsAt(keyword, i))
-					{
-						cheerIndex = i;
-						cheerLength = keyword.Length;
+					cheerIndex = i;
+					spriteList.Add(new Sprite("Kappa"));
 
-						spriteList.Add(new Sprite("Kappa"));
-
-						return true;
-					}
+					return true;
 				}
 			}
 
 			cheerIndex = -1;
+			cheerLength = -1;
+
+			return false;
+		}
+
+		/// <summary>
+		/// Attempts to parse a cheer at the given index using all possible keywords. If successful, bit value is set.
+		/// </summary>
+		private bool TryParseCheer(string message, int index, out int cheerLength, out int bitValue)
+		{
+			foreach (string keyword in CheerKeywords)
+			{
+				if (!message.ContainsAt(keyword, index))
+				{
+					continue;
+				}
+
+				int endIndex = index + keyword.Length;
+				int whitespaceIndex = message.IndexOf(' ', endIndex);
+
+				if (whitespaceIndex == -1)
+				{
+					whitespaceIndex = message.Length;
+				}
+
+				if (int.TryParse(message.Substring(endIndex, whitespaceIndex - endIndex), out bitValue))
+				{
+					cheerLength = whitespaceIndex - index;
+
+					return true;
+				}
+			}
+
+			bitValue = -1;
 			cheerLength = -1;
 
 			return false;

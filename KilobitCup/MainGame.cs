@@ -33,7 +33,6 @@ namespace KilobitCup
 			Content.RootDirectory = "Content";
 			Window.Title = "Kilobit Cup";
 			Window.Position = new Point(200);
-			IsMouseVisible = true;
 		}
 
 		/// <summary>
@@ -71,7 +70,7 @@ namespace KilobitCup
 			GraphicsDevice.Clear(Color.Black);
 
 			MouseState mouseState = Mouse.GetState();
-			ScrollingMessage message = new ScrollingMessage("text cheer1 one cheer2 two")
+			ScrollingMessage message = new ScrollingMessage("cheer1 one cheer000001 two")
 			{
 				Position = new Vector2(mouseState.X, mouseState.Y)
 			};
