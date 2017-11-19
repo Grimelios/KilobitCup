@@ -13,6 +13,9 @@ namespace GifProcessing
 	/// </summary>
 	public static class Quantizer
 	{
+		/// <summary>
+		/// Gets byte data for a gif.
+		/// </summary>
 		public static unsafe byte[] Quantize(Image source)
 		{
 			int height = source.Height;
@@ -31,21 +34,27 @@ namespace GifProcessing
 
 			byte* numPtr = (byte*)bitmapdata.Scan0.ToPointer();
 			int index = 0;
-			byte[] buffer = new byte[(source.Width * source.Height) * 4];
+			byte[] buffer = new byte[source.Width * source.Height * 4];
 
 			for (int i = 0; i < source.Width; i++)
 			{
 				for (int j = 0; j < source.Height; j++)
 				{
-					buffer[index] = numPtr[index];
-					index++;
-					buffer[index] = numPtr[index];
-					index++;
-					buffer[index] = numPtr[index];
-					index++;
-					buffer[index] = numPtr[index];
-					index++;
+					for (int k = 0; k < 4; k++)
+					{
+						buffer[index] = numPtr[index];
+						index++;
+					}
 				}
+			}
+			// I'm not sure why swapping these colors works, but swapping colors in this way works. Swapping colors here avoids having to
+			// do it when constructing gifs.
+			for (int k = 0; k < buffer.Length; k += 4)
+			{
+				byte temp = buffer[k];
+
+				buffer[k] = buffer[k + 2];
+				buffer[k + 2] = temp;
 			}
 
 			image.UnlockBits(bitmapdata);

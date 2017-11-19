@@ -189,6 +189,7 @@ namespace KilobitCup.Entities
 		/// </summary>
 		public override void Update(float dt)
 		{
+			cheerList.ForEach(c => c.Update(dt));
 		}
 
 		/// <summary>

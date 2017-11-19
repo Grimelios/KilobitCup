@@ -55,7 +55,7 @@ namespace KilobitCup.Entities
 			10000
 		};
 
-		private Sprite sprite;
+		private Gif gif;
 		private Vector2 positionOffset;
 
 		/// <summary>
@@ -63,21 +63,29 @@ namespace KilobitCup.Entities
 		/// </summary>
 		public Cheer(CheerTypes type, int bitValue)
 		{
-			sprite = new Sprite("Kappa");
+			gif = new Gif("muxy2");
 			positionOffset = new Vector2(Width / 2, VerticalOffset);
 		}
 
 		/// <summary>
 		/// Cheer width (based on the active cheermote).
 		/// </summary>
-		public int Width => 18;
+		public int Width => gif.Width;
 
 		/// <summary>
 		/// Cheer position.
 		/// </summary>
 		public override Vector2 Position
 		{
-			set { sprite.Position = value + positionOffset; }
+			set { gif.Position = value + positionOffset; }
+		}
+
+		/// <summary>
+		/// Updates the cheer.
+		/// </summary>
+		public override void Update(float dt)
+		{
+			gif.Update(dt);
 		}
 
 		/// <summary>
@@ -85,7 +93,7 @@ namespace KilobitCup.Entities
 		/// </summary>
 		public override void Draw(SpriteBatch sb)
 		{
-			sprite.Draw(sb);
+			gif.Draw(sb);
 		}
 	}
 }

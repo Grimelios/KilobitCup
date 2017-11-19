@@ -60,18 +60,7 @@ namespace KilobitCup.Core
 
 				for (int j = 0; j < textureData.Levels; j++)
 				{
-					byte[] data = textureData.Data;
-					
-					// I'm not sure why swapping these colors works, but swapping colors in this way works.
-					for (int k = 0; k < data.Length; k += 4)
-					{
-						byte temp = data[k];
-
-						data[k] = data[k + 2];
-						data[k + 2] = temp;
-					}
-
-					textures[i].SetData(j, null, data, 0, data.Length);
+					textures[i].SetData(j, null, textureData.Data, 0, textureData.Data.Length);
 				}
 			}
 		}

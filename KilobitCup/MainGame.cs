@@ -19,13 +19,13 @@ namespace KilobitCup
 		private const int DefaultHeight = 300;
 		private const int Gravity = 25;
 
-		private static readonly Color DarkBackground = new Color(30, 30, 30);
+		private static readonly Color DarkBackground = new Color(20, 20, 20);
 
 		private GraphicsDeviceManager graphics;
 		private SpriteBatch spriteBatch;
 		private BitListener bitListener;
 		private PhysicsAccumulator accumulator;
-		private Gif gif;
+		private ScrollingMessage message;
 
 		/// <summary>
 		/// Constructs the class.
@@ -56,7 +56,7 @@ namespace KilobitCup
 
 			bitListener = new BitListener();
 			accumulator = new PhysicsAccumulator(world);
-			gif = new Gif("Kappa4");
+			message = new ScrollingMessage("hello muxy45 notlikethis100 notlikethis1 pjsalt5");
 
 			base.Initialize();
 		}
@@ -75,12 +75,9 @@ namespace KilobitCup
 		protected override void Update(GameTime gameTime)
 		{
 			float dt = (float)gameTime.ElapsedGameTime.Milliseconds / 1000;
-
-			long value = gameTime.ElapsedGameTime.Ticks;
-			int test = (int)(dt * TimeSpan.TicksPerSecond);
-
+			
 			accumulator.Update(dt);
-			gif.Update(dt);
+			message.Update(dt);
 		}
 
 		/// <summary>
@@ -91,11 +88,10 @@ namespace KilobitCup
 			GraphicsDevice.Clear(DarkBackground);
 
 			MouseState mouseState = Mouse.GetState();
+			message.Position = new Vector2(mouseState.X, mouseState.Y);
 
 			spriteBatch.Begin();
-			//message.Draw(spriteBatch);
-			gif.Position = new Vector2(mouseState.X, mouseState.Y);
-			gif.Draw(spriteBatch);
+			message.Draw(spriteBatch);
 			spriteBatch.End();
 		}
 	}
