@@ -10,6 +10,7 @@
 
 #-------------------------------- References --------------------------------#
 
+/reference:C:/Users/Mark/Documents/Visual Studio 2015/Projects/KilobitCup/GifProcessing/bin/Debug/GifProcessing.dll
 
 #---------------------------------- Content ---------------------------------#
 
@@ -31,4 +32,9 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Textures/Kappa.png
+
+#begin Muxy.xgif
+/importer:GifImporter
+/processor:
+/build:Muxy.xgif
 

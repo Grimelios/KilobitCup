@@ -12,7 +12,7 @@ namespace KilobitCup.Core
 	/// <summary>
 	/// Represents an abstract 2D component. Used for images and text.
 	/// </summary>
-	public abstract class Component2D : IPositionable, IRotatable, IColorable, IRenderable
+	public abstract class Component2D : IPositionable, IRotatable, IColorable, IDynamic, IRenderable
 	{
 		/// <summary>
 		/// Component position.
@@ -28,6 +28,14 @@ namespace KilobitCup.Core
 		/// Component color.
 		/// </summary>
 		public Color Color { get; set; } = Color.White;
+
+		/// <summary>
+		/// Updates the component.
+		/// </summary>
+		/// <param name="dt"></param>
+		public virtual void Update(float dt)
+		{
+		}
 
 		/// <summary>
 		/// Draws the component.

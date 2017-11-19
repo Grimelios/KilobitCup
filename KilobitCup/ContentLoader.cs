@@ -24,6 +24,14 @@ namespace KilobitCup
 		}
 
 		/// <summary>
+		/// Loads custom data.
+		/// </summary>
+		public static T LoadCustom<T>(string filename)
+		{
+			return content.Load<T>(filename);
+		}
+
+		/// <summary>
 		/// Loads the given effect.
 		/// </summary>
 		public static Effect LoadEffect(string filename)

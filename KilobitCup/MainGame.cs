@@ -24,6 +24,7 @@ namespace KilobitCup
 		private SpriteBatch spriteBatch;
 		private BitListener bitListener;
 		private PhysicsAccumulator accumulator;
+		private Gif gif;
 
 		/// <summary>
 		/// Constructs the class.
@@ -53,6 +54,7 @@ namespace KilobitCup
 
 			bitListener = new BitListener();
 			accumulator = new PhysicsAccumulator(world);
+			gif = new Gif("Muxy");
 
 			base.Initialize();
 		}
@@ -73,6 +75,7 @@ namespace KilobitCup
 			float dt = (float)gameTime.ElapsedGameTime.Milliseconds / 1000;
 
 			accumulator.Update(dt);
+			gif.Update(dt);
 		}
 
 		/// <summary>
@@ -83,13 +86,11 @@ namespace KilobitCup
 			GraphicsDevice.Clear(DarkBackground);
 
 			MouseState mouseState = Mouse.GetState();
-			ScrollingMessage message = new ScrollingMessage("Oh hi cheer10 my name is Eli kappa123 and I loooooove Doomfist vohiyo1")
-			{
-				Position = new Vector2(mouseState.X, mouseState.Y)
-			};
 
 			spriteBatch.Begin();
-			message.Draw(spriteBatch);
+			//message.Draw(spriteBatch);
+			gif.Position = new Vector2(mouseState.X, mouseState.Y);
+			gif.Draw(spriteBatch);
 			spriteBatch.End();
 		}
 	}

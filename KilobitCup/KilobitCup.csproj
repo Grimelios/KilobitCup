@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="ContentLoader.cs" />
     <Compile Include="Core\Component2D.cs" />
+    <Compile Include="Core\Gif.cs" />
     <Compile Include="Core\Sprite.cs" />
     <Compile Include="Core\SpriteText.cs" />
     <Compile Include="Entities\Cheer.cs" />
@@ -91,6 +92,10 @@
     <ProjectReference Include="..\Farseer\Farseer.csproj">
       <Project>{0aad36e3-51a5-4a07-ab60-5c8a66bd38b7}</Project>
       <Name>Farseer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GifProcessing\GifProcessing.csproj">
+      <Project>{2e865e43-7062-497f-ad7e-32f546afa052}</Project>
+      <Name>GifProcessing</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
