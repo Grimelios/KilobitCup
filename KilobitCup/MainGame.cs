@@ -18,6 +18,8 @@ namespace KilobitCup
 		private const int DefaultHeight = 300;
 		private const int Gravity = 25;
 
+		private static readonly Color DarkBackground = new Color(30, 30, 30);
+
 		private GraphicsDeviceManager graphics;
 		private SpriteBatch spriteBatch;
 		private BitListener bitListener;
@@ -78,10 +80,10 @@ namespace KilobitCup
 		/// </summary>
 		protected override void Draw(GameTime gameTime)
 		{
-			GraphicsDevice.Clear(Color.Black);
+			GraphicsDevice.Clear(DarkBackground);
 
 			MouseState mouseState = Mouse.GetState();
-			ScrollingMessage message = new ScrollingMessage("My name is Lucidus16 cheer100 and I'm super rich kappa1000")
+			ScrollingMessage message = new ScrollingMessage("Oh hi cheer10 my name is Eli kappa123 and I loooooove Doomfist vohiyo1")
 			{
 				Position = new Vector2(mouseState.X, mouseState.Y)
 			};

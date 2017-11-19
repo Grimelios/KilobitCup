@@ -16,8 +16,6 @@ namespace KilobitCup.Twitch
 	/// </summary>
 	public class BitListener
 	{
-		private const string ClientID = "zulz2i7hm8u5vofu2095940hrq81nx";
-
 		private WebSocket socket;
 
 		private string channelID;
@@ -39,11 +37,12 @@ namespace KilobitCup.Twitch
 		/// </summary>
 		private async void OnOpen(object sender, EventArgs e)
 		{
-			string userID = await GetID("https://api.twitch.tv/kraken/channels/grimelios", "Kilobit_Secret");
+			string json = await TwitchAPI.GetWebResponse("https://api.twitch.tv/kraken/channels/grimelios");
+			string userID = ParseChannelID(json);
 
 			return;
 
-			channelID = await GetID("https://api.twitch.tv/kraken/channel", "Twitch_OAuth");
+			//channelID = await GetID("https://api.twitch.tv/kraken/channel", "Twitch_OAuth");
 
 			JObject dataObject = new JObject
 			{
@@ -58,24 +57,6 @@ namespace KilobitCup.Twitch
 			};
 
 			socket.Send(jObject.ToString());
-		}
-
-		/// <summary>
-		/// Gets an ID from Twitch based on the given data.
-		/// </summary>
-		private async Task<string> GetID(string url, string environmentVariable)
-		{
-			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-			request.Method = "GET";
-			request.Headers.Add("Client-ID", ClientID);
-			request.Headers.Add("Authorization", "OAuth " + Environment.GetEnvironmentVariable(environmentVariable));
-
-			HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-
-			using (StreamReader reader = new StreamReader(response.GetResponseStream()))
-			{
-				return ParseChannelID(reader.ReadToEnd());
-			}
 		}
 
 		/// <summary>

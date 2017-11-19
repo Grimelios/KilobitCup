@@ -121,7 +121,7 @@ namespace KilobitCup.Entities
 				if (TryParseCheer(message, i, out cheerLength, out bitValue) && bitValue > 0)
 				{
 					cheerIndex = i;
-					cheerList.Add(new Cheer(bitValue));
+					cheerList.Add(new Cheer(CheerTypes.Cheer, bitValue));
 
 					return true;
 				}
