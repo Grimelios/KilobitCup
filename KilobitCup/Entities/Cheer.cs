@@ -19,23 +19,23 @@ namespace KilobitCup.Entities
 	/// </summary>
 	public enum CheerTypes
 	{
-		Cheer,//
-		RIPCheer,//
-		Kappa,//
-		Kreygasm,//
-		SwiftRage,//
-		FourHead,//
-		PJSalt,//
-		MrDestructoid,//
-		TriHard,//
-		NotLikeThis,//
-		FailFish,//
-		VoHiYo,//
-		Streamlabs,//
-		Muxy,//
-		BDay,//
-		BitBoss,//
-		DoodleCheer,//
+		Cheer,
+		RIPCheer,
+		Kappa,
+		Kreygasm,
+		SwiftRage,
+		FourHead,
+		PJSalt,
+		MrDestructoid,
+		TriHard,
+		NotLikeThis,
+		FailFish,
+		VoHiYo,
+		Streamlabs,
+		Muxy,
+		BDay,
+		BitBoss,
+		DoodleCheer,
 		Invalid
 	}
 

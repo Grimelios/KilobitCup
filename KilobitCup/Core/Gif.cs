@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GifProcessing;
-//using GifProcessing;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace KilobitCup.Core
@@ -14,45 +14,25 @@ namespace KilobitCup.Core
 	/// </summary>
 	public class Gif : Component2D
 	{
-		private long currentTick;
-		private bool stopped;
+		private const float Framerate = 1 / 25.5f;
+
+		private int currentFrame;
+		private float elapsed;
 
 		private Texture2D[] textures;
+		private Vector2 origin;
 		
 		/// <summary>
 		/// Constructs the class.
 		/// </summary>
 		public Gif(string filename)
 		{
-			GifData data = ContentLoader.LoadCustom<GifData>(filename);
+			CreateTextures(ContentLoader.LoadCustom<GifData>(filename).Frames);
 
-			textures = ContentLoader.LoadCustom<GifData>(filename).Textures;
+			// This assumes all frames are the same size (which I think has to be true anyway).
+			Texture2D frame = textures[0];
+			origin = new Vector2(frame.Width, frame.Height) / 2;
 		}
-
-		/// <summary>
-		/// Gets a texture for the current frame.
-		/// </summary>
-		public Texture2D CurrentTexture => textures[CurrentFrame];
-
-		/// <summary>
-		/// Gets the frame at the given index.
-		/// </summary>
-		public Texture2D this[int index] => textures[index];
-
-		/// <summary>
-		/// Whether the gif is paused.
-		/// </summary>
-		public bool Paused { get; set; }
-
-		/// <summary>
-		/// Current frame.
-		/// </summary>
-		public int CurrentFrame { get; private set; }
-
-		/// <summary>
-		/// Frame count.
-		/// </summary>
-		public int FrameCount => textures.Length;
 
 		/// <summary>
 		/// Gif width.
@@ -65,23 +45,25 @@ namespace KilobitCup.Core
 		public int Height => textures[0].Height;
 
 		/// <summary>
-		/// Plays the gif.
+		/// Creates textures from the given frame array.
 		/// </summary>
-		public void Play()
+		private void CreateTextures(TextureData[] frames)
 		{
-			CurrentFrame = 0;
-			Paused = false;
-			stopped = false;
-		}
+			textures = new Texture2D[frames.Length];
 
-		/// <summary>
-		/// Stops the gif.
-		/// </summary>
-		public void Stop()
-		{
-			CurrentFrame = 0;
-			Paused = false;
-			stopped = true;
+			for (int i = 0; i < frames.Length; i++)
+			{
+				TextureData textureData = frames[i];
+
+				textures[i] = new Texture2D(GraphicsUtilities.Device, textureData.Width, textureData.Height, false, textureData.SurfaceFormat);
+
+				for (int j = 0; j < textureData.Levels; j++)
+				{
+					byte[] data = textureData.Data;
+
+					textures[i].SetData(j, null, data, 0, data.Length);
+				}
+			}
 		}
 
 		/// <summary>
@@ -89,17 +71,12 @@ namespace KilobitCup.Core
 		/// </summary>
 		public override void Update(float dt)
 		{
-			if (Paused || stopped)
+			elapsed += dt;
+			
+			if (elapsed >= Framerate)
 			{
-				return;
-			}
-
-			currentTick += (long)(dt * TimeSpan.TicksPerSecond);
-
-			if (currentTick >= 0xf4240L)
-			{
-				currentTick = 0;
-				CurrentFrame = CurrentFrame == textures.Length - 1 ? 0 : ++CurrentFrame;
+				elapsed -= Framerate;
+				currentFrame = currentFrame == textures.Length - 1 ? 0 : ++currentFrame;
 			}
 		}
 
@@ -108,6 +85,7 @@ namespace KilobitCup.Core
 		/// </summary>
 		public override void Draw(SpriteBatch sb)
 		{
+			sb.Draw(textures[currentFrame], Position, null, Color, Rotation, origin, 1, SpriteEffects.None, 0);
 		}
 	}
 }

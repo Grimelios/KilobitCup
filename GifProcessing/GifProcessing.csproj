@@ -45,7 +45,6 @@
     <Compile Include="GifImporter.cs" />
     <Compile Include="GifProcessor.cs" />
     <Compile Include="GifData.cs" />
-    <Compile Include="GifReader.cs" />
     <Compile Include="GifWriter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Quantizer.cs" />

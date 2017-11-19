@@ -50,6 +50,7 @@
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\ScrollingMessage.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="GraphicsUtilities.cs" />
     <Compile Include="Interfaces\IColorable.cs" />
     <Compile Include="Interfaces\IDynamic.cs" />
     <Compile Include="Interfaces\IPositionable.cs" />

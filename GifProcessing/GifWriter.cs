@@ -18,7 +18,8 @@ namespace GifProcessing
 		/// </summary>
 		public override string GetRuntimeReader(TargetPlatform targetPlatform)
 		{
-			return typeof(GifReader).AssemblyQualifiedName;
+			//return typeof(GifReader).AssemblyQualifiedName;
+			return null;
 		}
 
 		/// <summary>

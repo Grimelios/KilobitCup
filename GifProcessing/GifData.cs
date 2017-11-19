@@ -16,10 +16,5 @@ namespace GifProcessing
 		/// Array of frame data.
 		/// </summary>
 		public TextureData[] Frames { get; set; }
-
-		/// <summary>
-		/// Array of textures.
-		/// </summary>
-		public Texture2D[] Textures { get; set; }
 	}
 }

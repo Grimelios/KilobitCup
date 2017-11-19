@@ -1,4 +1,5 @@
-﻿using FarseerPhysics.Dynamics;
+﻿using System;
+using FarseerPhysics.Dynamics;
 using KilobitCup.Core;
 using KilobitCup.Entities;
 using KilobitCup.Physics;
@@ -50,6 +51,7 @@ namespace KilobitCup
 			World world = new World(new Vector2(0, Gravity));
 
 			ContentLoader.Initialize(Content);
+			GraphicsUtilities.Device = GraphicsDevice;
 			PhysicsFactory.Initialize(world);
 
 			bitListener = new BitListener();
@@ -73,6 +75,9 @@ namespace KilobitCup
 		protected override void Update(GameTime gameTime)
 		{
 			float dt = (float)gameTime.ElapsedGameTime.Milliseconds / 1000;
+
+			long value = gameTime.ElapsedGameTime.Ticks;
+			int test = (int)(dt * TimeSpan.TicksPerSecond);
 
 			accumulator.Update(dt);
 			gif.Update(dt);
