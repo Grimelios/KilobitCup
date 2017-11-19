@@ -47,6 +47,7 @@ namespace GifProcessing
 					}
 				}
 			}
+
 			// I'm not sure why swapping these colors works, but swapping colors in this way works. Swapping colors here avoids having to
 			// do it when constructing gifs.
 			for (int k = 0; k < buffer.Length; k += 4)

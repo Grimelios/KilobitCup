@@ -61,7 +61,7 @@ namespace KilobitCup.Entities
 		/// <summary>
 		/// Constructs the cheer. Bit value is used to determine which image to use.
 		/// </summary>
-		public Cheer(CheerTypes type, int bitValue)
+		public Cheer(CheerTypes type, int bitValue) : base(EntityTypes.Cheer)
 		{
 			int threshold = 0;
 

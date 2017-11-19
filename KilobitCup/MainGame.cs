@@ -1,7 +1,9 @@
 ﻿using System;
 using FarseerPhysics.Dynamics;
 using KilobitCup.Core;
+using KilobitCup.Data;
 using KilobitCup.Entities;
+using KilobitCup.Interfaces;
 using KilobitCup.Physics;
 using KilobitCup.Twitch;
 using Microsoft.Xna.Framework;
@@ -15,8 +17,6 @@ namespace KilobitCup
 	/// </summary>
 	public class MainGame : Game
 	{
-		private const int DefaultWidth = 400;
-		private const int DefaultHeight = 300;
 		private const int Gravity = 25;
 
 		private static readonly Color DarkBackground = new Color(20, 20, 20);
@@ -25,7 +25,7 @@ namespace KilobitCup
 		private SpriteBatch spriteBatch;
 		private BitListener bitListener;
 		private PhysicsAccumulator accumulator;
-		private ScrollingMessage message;
+		private Scene scene;
 
 		/// <summary>
 		/// Constructs the class.
@@ -34,13 +34,14 @@ namespace KilobitCup
 		{
 			graphics = new GraphicsDeviceManager(this)
 			{
-				PreferredBackBufferWidth = DefaultWidth,
-				PreferredBackBufferHeight = DefaultHeight
+				PreferredBackBufferWidth = Resolution.Width,
+				PreferredBackBufferHeight = Resolution.Height
 			};
 
 			Content.RootDirectory = "Content";
 			Window.Title = "Kilobit Cup";
 			Window.Position = new Point(200);
+			IsMouseVisible = true;
 		}
 
 		/// <summary>
@@ -56,7 +57,9 @@ namespace KilobitCup
 
 			bitListener = new BitListener();
 			accumulator = new PhysicsAccumulator(world);
-			message = new ScrollingMessage("hello kappa123 notlikethis900 notlikethis5001");
+			scene = new Scene();
+
+			MessageSystem.Send(MessageTypes.Bits, new BitData("cheer10000 Hello vohiyo5000", "Terra21", 5100));
 
 			base.Initialize();
 		}
@@ -77,7 +80,7 @@ namespace KilobitCup
 			float dt = (float)gameTime.ElapsedGameTime.Milliseconds / 1000;
 			
 			accumulator.Update(dt);
-			message.Update(dt);
+			scene.Update(dt);
 		}
 
 		/// <summary>
@@ -86,12 +89,9 @@ namespace KilobitCup
 		protected override void Draw(GameTime gameTime)
 		{
 			GraphicsDevice.Clear(DarkBackground);
-
-			MouseState mouseState = Mouse.GetState();
-			message.Position = new Vector2(mouseState.X, mouseState.Y);
-
+			
 			spriteBatch.Begin();
-			message.Draw(spriteBatch);
+			scene.Draw(spriteBatch);
 			spriteBatch.End();
 		}
 	}

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using KilobitCup;
 using KilobitCup.Entities;
 using KilobitCup.Twitch;
 using Newtonsoft.Json.Linq;
@@ -46,7 +47,7 @@ namespace GifRetriever
 			Type cheerType = typeof(CheerTypes);
 
 			// The last entry in CheerTypes is an invalid marker.
-			int cheerCount = Enum.GetValues(cheerType).Length - 1;
+			int cheerCount = CoreFunctions.EnumCount<CheerTypes>() - 1;
 
 			dataArray = new CheerData[cheerCount];
 

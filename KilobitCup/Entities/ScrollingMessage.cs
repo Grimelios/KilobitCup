@@ -14,6 +14,9 @@ namespace KilobitCup.Entities
 	/// </summary>
 	public class ScrollingMessage : Entity
 	{
+		private const int TopOffset = 30;
+		private const int Spacing = 30;
+
 		private static readonly string[] CheerKeywords =
 		{
 			"cheer",
@@ -47,7 +50,7 @@ namespace KilobitCup.Entities
 		/// <summary>
 		/// Constructs the message. Message tokens are parsed on creation.
 		/// </summary>
-		public ScrollingMessage(string message)
+		public ScrollingMessage(string message, int messageCount) : base(EntityTypes.Message)
 		{
 			textList = new List<SpriteText>();
 			cheerList = new List<Cheer>();
@@ -55,6 +58,8 @@ namespace KilobitCup.Entities
 
 			ComputeTokens(message);
 			ComputeOffsets();
+
+			Position = new Vector2(Resolution.Width, TopOffset + Spacing * messageCount);
 		}
 
 		/// <summary>
