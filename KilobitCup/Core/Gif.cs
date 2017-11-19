@@ -14,7 +14,7 @@ namespace KilobitCup.Core
 	/// </summary>
 	public class Gif : Component2D
 	{
-		private const float Framerate = 1 / 25.5f;
+		private const float Framerate = 1f / 25;
 
 		private int currentFrame;
 		private float elapsed;
@@ -55,11 +55,21 @@ namespace KilobitCup.Core
 			{
 				TextureData textureData = frames[i];
 
-				textures[i] = new Texture2D(GraphicsUtilities.Device, textureData.Width, textureData.Height, false, textureData.SurfaceFormat);
+				textures[i] = new Texture2D(GraphicsUtilities.Device, textureData.Width, textureData.Height, false,
+					textureData.SurfaceFormat);
 
 				for (int j = 0; j < textureData.Levels; j++)
 				{
 					byte[] data = textureData.Data;
+					
+					// I'm not sure why swapping these colors works, but swapping colors in this way works.
+					for (int k = 0; k < data.Length; k += 4)
+					{
+						byte temp = data[k];
+
+						data[k] = data[k + 2];
+						data[k + 2] = temp;
+					}
 
 					textures[i].SetData(j, null, data, 0, data.Length);
 				}
@@ -73,7 +83,7 @@ namespace KilobitCup.Core
 		{
 			elapsed += dt;
 			
-			if (elapsed >= Framerate)
+			while (elapsed >= Framerate)
 			{
 				elapsed -= Framerate;
 				currentFrame = currentFrame == textures.Length - 1 ? 0 : ++currentFrame;
