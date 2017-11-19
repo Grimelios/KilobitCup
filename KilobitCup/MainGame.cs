@@ -56,7 +56,7 @@ namespace KilobitCup
 
 			bitListener = new BitListener();
 			accumulator = new PhysicsAccumulator(world);
-			message = new ScrollingMessage("hello muxy45 notlikethis100 notlikethis1 pjsalt5");
+			message = new ScrollingMessage("hello kappa123 notlikethis900 notlikethis5001");
 
 			base.Initialize();
 		}

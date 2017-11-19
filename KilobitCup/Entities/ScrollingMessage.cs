@@ -17,6 +17,7 @@ namespace KilobitCup.Entities
 		private static readonly string[] CheerKeywords =
 		{
 			"cheer",
+			"ripcheer",
 			"kappa",
 			"kreygasm",
 			"swiftrage",
@@ -27,8 +28,11 @@ namespace KilobitCup.Entities
 			"notlikethis",
 			"failfish",
 			"vohiyo",
+			"muxy",
 			"streamlabs",
-			"muxy"
+			"bday",
+			"bitboss",
+			"doodlecheer"
 		};
 
 		// Every valid cheer must contain at least one digit.
@@ -121,7 +125,6 @@ namespace KilobitCup.Entities
 				if (TryParseCheer(message, i, out cheerLength, out bitValue) && bitValue > 0)
 				{
 					cheerIndex = i;
-					cheerList.Add(new Cheer(CheerTypes.Cheer, bitValue));
 
 					return true;
 				}
@@ -138,8 +141,10 @@ namespace KilobitCup.Entities
 		/// </summary>
 		private bool TryParseCheer(string message, int index, out int cheerLength, out int bitValue)
 		{
-			foreach (string keyword in CheerKeywords)
+			for (int i = 0; i < CheerKeywords.Length; i++)
 			{
+				string keyword = CheerKeywords[i];
+
 				if (!message.ContainsAt(keyword, index))
 				{
 					continue;
@@ -156,6 +161,7 @@ namespace KilobitCup.Entities
 				if (int.TryParse(message.Substring(endIndex, whitespaceIndex - endIndex), out bitValue))
 				{
 					cheerLength = whitespaceIndex - index;
+					cheerList.Add(new Cheer((CheerTypes)i, bitValue));
 
 					return true;
 				}

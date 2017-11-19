@@ -63,7 +63,14 @@ namespace KilobitCup.Entities
 		/// </summary>
 		public Cheer(CheerTypes type, int bitValue)
 		{
-			gif = new Gif("muxy2");
+			int threshold = 0;
+
+			while (threshold < BitThresholds.Length - 1 && bitValue >= BitThresholds[threshold + 1])
+			{
+				threshold++;
+			}
+
+			gif = new Gif(type.ToString() + threshold);
 			positionOffset = new Vector2(Width / 2, VerticalOffset);
 		}
 
