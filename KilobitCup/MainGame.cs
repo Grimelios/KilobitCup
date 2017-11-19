@@ -56,7 +56,7 @@ namespace KilobitCup
 
 			bitListener = new BitListener();
 			accumulator = new PhysicsAccumulator(world);
-			gif = new Gif("Muxy");
+			gif = new Gif("Kappa4");
 
 			base.Initialize();
 		}

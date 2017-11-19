@@ -27,7 +27,7 @@ namespace KilobitCup.Core
 		/// </summary>
 		public Gif(string filename)
 		{
-			CreateTextures(ContentLoader.LoadCustom<GifData>(filename).Frames);
+			CreateTextures(ContentLoader.LoadCustom<GifData>("Gifs/" + filename).Frames);
 
 			// This assumes all frames are the same size (which I think has to be true anyway).
 			Texture2D frame = textures[0];

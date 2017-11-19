@@ -33,8 +33,428 @@
 /processorParam:TextureFormat=Color
 /build:Textures/Kappa.png
 
-#begin Muxy.xgif
+#begin Gifs/BDay0.xgif
 /importer:GifImporter
-/processor:
-/build:Muxy.xgif
+/processor:GifProcessor
+/build:Gifs/BDay0.xgif
+
+#begin Gifs/BDay1.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/BDay1.xgif
+
+#begin Gifs/BDay2.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/BDay2.xgif
+
+#begin Gifs/BDay3.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/BDay3.xgif
+
+#begin Gifs/BDay4.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/BDay4.xgif
+
+#begin Gifs/BitBoss0.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/BitBoss0.xgif
+
+#begin Gifs/BitBoss1.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/BitBoss1.xgif
+
+#begin Gifs/BitBoss2.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/BitBoss2.xgif
+
+#begin Gifs/BitBoss3.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/BitBoss3.xgif
+
+#begin Gifs/BitBoss4.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/BitBoss4.xgif
+
+#begin Gifs/Cheer0.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/Cheer0.xgif
+
+#begin Gifs/Cheer1.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/Cheer1.xgif
+
+#begin Gifs/Cheer2.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/Cheer2.xgif
+
+#begin Gifs/Cheer3.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/Cheer3.xgif
+
+#begin Gifs/Cheer4.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/Cheer4.xgif
+
+#begin Gifs/DoodleCheer0.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/DoodleCheer0.xgif
+
+#begin Gifs/DoodleCheer1.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/DoodleCheer1.xgif
+
+#begin Gifs/DoodleCheer2.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/DoodleCheer2.xgif
+
+#begin Gifs/DoodleCheer3.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/DoodleCheer3.xgif
+
+#begin Gifs/DoodleCheer4.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/DoodleCheer4.xgif
+
+#begin Gifs/FailFish0.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/FailFish0.xgif
+
+#begin Gifs/FailFish1.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/FailFish1.xgif
+
+#begin Gifs/FailFish2.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/FailFish2.xgif
+
+#begin Gifs/FailFish3.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/FailFish3.xgif
+
+#begin Gifs/FailFish4.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/FailFish4.xgif
+
+#begin Gifs/FourHead0.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/FourHead0.xgif
+
+#begin Gifs/FourHead1.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/FourHead1.xgif
+
+#begin Gifs/FourHead2.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/FourHead2.xgif
+
+#begin Gifs/FourHead3.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/FourHead3.xgif
+
+#begin Gifs/FourHead4.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/FourHead4.xgif
+
+#begin Gifs/Kappa0.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/Kappa0.xgif
+
+#begin Gifs/Kappa1.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/Kappa1.xgif
+
+#begin Gifs/Kappa2.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/Kappa2.xgif
+
+#begin Gifs/Kappa3.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/Kappa3.xgif
+
+#begin Gifs/Kappa4.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/Kappa4.xgif
+
+#begin Gifs/Kreygasm0.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/Kreygasm0.xgif
+
+#begin Gifs/Kreygasm1.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/Kreygasm1.xgif
+
+#begin Gifs/Kreygasm2.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/Kreygasm2.xgif
+
+#begin Gifs/Kreygasm3.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/Kreygasm3.xgif
+
+#begin Gifs/Kreygasm4.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/Kreygasm4.xgif
+
+#begin Gifs/MrDestructoid0.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/MrDestructoid0.xgif
+
+#begin Gifs/MrDestructoid1.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/MrDestructoid1.xgif
+
+#begin Gifs/MrDestructoid2.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/MrDestructoid2.xgif
+
+#begin Gifs/MrDestructoid3.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/MrDestructoid3.xgif
+
+#begin Gifs/MrDestructoid4.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/MrDestructoid4.xgif
+
+#begin Gifs/Muxy0.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/Muxy0.xgif
+
+#begin Gifs/Muxy1.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/Muxy1.xgif
+
+#begin Gifs/Muxy2.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/Muxy2.xgif
+
+#begin Gifs/Muxy3.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/Muxy3.xgif
+
+#begin Gifs/Muxy4.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/Muxy4.xgif
+
+#begin Gifs/NotLikeThis0.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/NotLikeThis0.xgif
+
+#begin Gifs/NotLikeThis1.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/NotLikeThis1.xgif
+
+#begin Gifs/NotLikeThis2.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/NotLikeThis2.xgif
+
+#begin Gifs/NotLikeThis3.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/NotLikeThis3.xgif
+
+#begin Gifs/NotLikeThis4.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/NotLikeThis4.xgif
+
+#begin Gifs/PJSalt0.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/PJSalt0.xgif
+
+#begin Gifs/PJSalt1.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/PJSalt1.xgif
+
+#begin Gifs/PJSalt2.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/PJSalt2.xgif
+
+#begin Gifs/PJSalt3.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/PJSalt3.xgif
+
+#begin Gifs/PJSalt4.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/PJSalt4.xgif
+
+#begin Gifs/RIPCheer0.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/RIPCheer0.xgif
+
+#begin Gifs/RIPCheer1.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/RIPCheer1.xgif
+
+#begin Gifs/RIPCheer2.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/RIPCheer2.xgif
+
+#begin Gifs/RIPCheer3.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/RIPCheer3.xgif
+
+#begin Gifs/RIPCheer4.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/RIPCheer4.xgif
+
+#begin Gifs/Streamlabs0.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/Streamlabs0.xgif
+
+#begin Gifs/Streamlabs1.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/Streamlabs1.xgif
+
+#begin Gifs/Streamlabs2.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/Streamlabs2.xgif
+
+#begin Gifs/Streamlabs3.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/Streamlabs3.xgif
+
+#begin Gifs/Streamlabs4.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/Streamlabs4.xgif
+
+#begin Gifs/SwiftRage0.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/SwiftRage0.xgif
+
+#begin Gifs/SwiftRage1.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/SwiftRage1.xgif
+
+#begin Gifs/SwiftRage2.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/SwiftRage2.xgif
+
+#begin Gifs/SwiftRage3.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/SwiftRage3.xgif
+
+#begin Gifs/SwiftRage4.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/SwiftRage4.xgif
+
+#begin Gifs/TriHard0.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/TriHard0.xgif
+
+#begin Gifs/TriHard1.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/TriHard1.xgif
+
+#begin Gifs/TriHard2.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/TriHard2.xgif
+
+#begin Gifs/TriHard3.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/TriHard3.xgif
+
+#begin Gifs/TriHard4.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/TriHard4.xgif
+
+#begin Gifs/VoHiYo0.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/VoHiYo0.xgif
+
+#begin Gifs/VoHiYo1.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/VoHiYo1.xgif
+
+#begin Gifs/VoHiYo2.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/VoHiYo2.xgif
+
+#begin Gifs/VoHiYo3.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/VoHiYo3.xgif
+
+#begin Gifs/VoHiYo4.xgif
+/importer:GifImporter
+/processor:GifProcessor
+/build:Gifs/VoHiYo4.xgif
 
