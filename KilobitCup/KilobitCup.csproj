@@ -56,6 +56,7 @@
     <Compile Include="Interfaces\IRotatable.cs" />
     <Compile Include="MainGame.cs" />
     <Compile Include="Physics\PhysicsAccumulator.cs" />
+    <Compile Include="Physics\PhysicsConvert.cs" />
     <Compile Include="Physics\PhysicsFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
