@@ -50,6 +50,8 @@ namespace KilobitCup.Entities
 		private bool accelerating;
 		private float totalWidth;
 
+		private int releaseIndex;
+
 		/// <summary>
 		/// Constructs the message. Message tokens are parsed on creation.
 		/// </summary>
@@ -80,7 +82,7 @@ namespace KilobitCup.Entities
 					textList[i].Position = value + offsetList[i * 2 + (1 - indexCorrection)];
 				}
 
-				for (int i = 0; i < cheerList.Count; i++)
+				for (int i = releaseIndex; i < cheerList.Count; i++)
 				{
 					cheerList[i].Position = value + offsetList[i * 2 + indexCorrection];
 				}
@@ -226,6 +228,11 @@ namespace KilobitCup.Entities
 			{
 				Position -= new Vector2(data.ScrollSpeed * dt, 0);
 
+				if (releaseIndex < cheerList.Count)
+				{
+					CheckCheerRelease();
+				}
+
 				if (Position.X <= Resolution.Width / 2 - totalWidth)
 				{
 					accelerating = true;
@@ -236,12 +243,36 @@ namespace KilobitCup.Entities
 		}
 
 		/// <summary>
+		/// Checks if the next cheer should be released and, if so, releases it. Only called if at least one cheer is left in the list.
+		/// </summary>
+		private void CheckCheerRelease()
+		{
+			Cheer nextCheer = cheerList[releaseIndex];
+
+			if (nextCheer.Position.X <= Resolution.Width / 2)
+			{
+				nextCheer.EnablePhysics();
+				Scene.Add(nextCheer);
+				releaseIndex++;
+
+				if (releaseIndex == cheerList.Count)
+				{
+					accelerating = true;
+				}
+			}
+		}
+
+		/// <summary>
 		/// Draws the message.
 		/// </summary>
 		public override void Draw(SpriteBatch sb)
 		{
 			textList.ForEach(t => t.Draw(sb));
-			cheerList.ForEach(s => s.Draw(sb));
+
+			for (int i = releaseIndex; i < cheerList.Count; i++)
+			{
+				cheerList[i].Draw(sb);
+			}
 		}
 	}
 }

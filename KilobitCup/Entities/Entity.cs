@@ -21,9 +21,11 @@ namespace KilobitCup.Entities
 	/// <summary>
 	/// Represents an abstract entity. As entity is anything that can be updated and drawn on the screen.
 	/// </summary>
-	public abstract class Entity : IPositionable, IDynamic, IRenderable
+	public abstract class Entity : IPositionable, IRotatable, IDynamic, IRenderable
 	{
 		private Vector2 position;
+
+		private float rotation;
 
 		/// <summary>
 		/// Constructs the entity.
@@ -40,6 +42,15 @@ namespace KilobitCup.Entities
 		{
 			get { return position; }
 			set { position = value; }
+		}
+
+		/// <summary>
+		/// Entity rotation.
+		/// </summary>
+		public virtual float Rotation
+		{
+			get { return rotation; }
+			set { rotation = value; }
 		}
 
 		/// <summary>

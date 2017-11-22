@@ -17,7 +17,7 @@ namespace KilobitCup
 	/// </summary>
 	public class MainGame : Game
 	{
-		private const int Gravity = 25;
+		private const int Gravity = 16;
 
 		private static readonly Color DarkBackground = new Color(20, 20, 20);
 
@@ -59,7 +59,11 @@ namespace KilobitCup
 			accumulator = new PhysicsAccumulator(world);
 			scene = new Scene();
 
-			MessageSystem.Send(MessageTypes.Bits, new BitData("cheer10000 Hello, and here are some bits! vohiyo5000 What's that? muxy600 You wanted more bits? notlikethis10 You're such a filthy sellout. 4head10000", "Terra21", 5100));
+			MessageSystem.Send(MessageTypes.Bits, new BitData("Cheer cheer10000 RIPCheer ripcheer10000 Kappa kappa10000 Kreygasm" +
+			                                                  "kreygasm10000 SwiftRage swiftrage10000 4Head 4head10000 PJSalt pjsalt10000 " +
+			                                                  "MrDestructoid mrdestructoid10000 TriHard trihard10000 NotLikeThis notlikethis10000 " +
+			                                                  "FailFish failfish10000 VoHiYo vohiyo10000 StreamLabs streamlabs10000 Muxy muxy10000 " +
+			                                                  "BDay bday10000 BitBoss bitboss10000 DoodleCheer doodlecheer10000", "Terra21", 5100));
 
 			base.Initialize();
 		}
