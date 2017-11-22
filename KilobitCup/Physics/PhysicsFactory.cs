@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using FarseerPhysics.Dynamics;
 using FarseerPhysics.Factories;
 using KilobitCup.Entities;
+using Microsoft.Xna.Framework;
 
 namespace KilobitCup.Physics
 {
@@ -34,6 +35,14 @@ namespace KilobitCup.Physics
 		}
 
 		/// <summary>
+		/// Creates an empty static body.
+		/// </summary>
+		public static Body CreateBody()
+		{
+			return BodyFactory.CreateBody(world);
+		}
+
+		/// <summary>
 		/// Creates a rectangular body.
 		/// </summary>
 		public static Body CreateRectangle(float width, float height, Units units, BodyType bodyType, Entity entity)
@@ -49,6 +58,20 @@ namespace KilobitCup.Physics
 			body.UserData = entity;
 
 			return body;
+		}
+
+		/// <summary>
+		/// Attaches an edge to the given body.
+		/// </summary>
+		public static void AttachEdge(Body body, Vector2 start, Vector2 end, Units units)
+		{
+			if (units == Units.Pixels)
+			{
+				start = PhysicsConvert.ToMeters(start);
+				end = PhysicsConvert.ToMeters(end);
+			}
+
+			FixtureFactory.AttachEdge(start, end, body);
 		}
 	}
 }

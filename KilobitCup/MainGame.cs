@@ -65,6 +65,18 @@ namespace KilobitCup
 			                                                  "FailFish failfish10000 VoHiYo vohiyo10000 StreamLabs streamlabs10000 Muxy muxy10000 " +
 			                                                  "BDay bday10000 BitBoss bitboss10000 DoodleCheer doodlecheer10000", "Terra21", 5100));
 
+			Vector2 topLeft = new Vector2(75, 0);
+			Vector2 topRight = new Vector2(Resolution.Width - 75, 0);
+			Vector2 bottomLeft = new Vector2(175, Resolution.Height - 75);
+			Vector2 bottomRight = new Vector2(Resolution.Width - 175, Resolution.Height - 75);
+
+			Body debugBody = PhysicsFactory.CreateBody();
+
+			PhysicsFactory.AttachEdge(debugBody, topLeft, topRight, Units.Pixels);
+			PhysicsFactory.AttachEdge(debugBody, topLeft, bottomLeft, Units.Pixels);
+			PhysicsFactory.AttachEdge(debugBody, topRight, bottomRight, Units.Pixels);
+			PhysicsFactory.AttachEdge(debugBody, bottomLeft, bottomRight, Units.Pixels);
+
 			base.Initialize();
 		}
 
