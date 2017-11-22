@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using KilobitCup.Core;
+using KilobitCup.Data;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -14,9 +15,6 @@ namespace KilobitCup.Entities
 	/// </summary>
 	public class ScrollingMessage : Entity
 	{
-		private const int TopOffset = 30;
-		private const int Spacing = 30;
-
 		private static readonly string[] CheerKeywords =
 		{
 			"cheer",
@@ -41,6 +39,8 @@ namespace KilobitCup.Entities
 		// Every valid cheer must contain at least one digit.
 		private static int minimumKeywordLength = CheerKeywords.Min(k => k.Length) + 1;
 
+		private static ScrollingMessageData data = new ScrollingMessageData();
+
 		private List<SpriteText> textList;
 		private List<Cheer> cheerList;
 		private List<Vector2> offsetList;
@@ -59,7 +59,7 @@ namespace KilobitCup.Entities
 			ComputeTokens(message);
 			ComputeOffsets();
 
-			Position = new Vector2(Resolution.Width, TopOffset + Spacing * messageCount);
+			Position = new Vector2(Resolution.Width, data.TopOffset + data.Spacing * messageCount);
 		}
 
 		/// <summary>
