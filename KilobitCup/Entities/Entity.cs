@@ -23,6 +23,8 @@ namespace KilobitCup.Entities
 	/// </summary>
 	public abstract class Entity : IPositionable, IDynamic, IRenderable
 	{
+		private Vector2 position;
+
 		/// <summary>
 		/// Constructs the entity.
 		/// </summary>
@@ -34,7 +36,11 @@ namespace KilobitCup.Entities
 		/// <summary>
 		/// Entity position.
 		/// </summary>
-		public virtual Vector2 Position { get; set; }
+		public virtual Vector2 Position
+		{
+			get { return position; }
+			set { position = value; }
+		}
 
 		/// <summary>
 		/// Entity type.

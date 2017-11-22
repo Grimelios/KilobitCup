@@ -47,6 +47,7 @@
     <Compile Include="Core\Gif.cs" />
     <Compile Include="Core\Sprite.cs" />
     <Compile Include="Core\SpriteText.cs" />
+    <Compile Include="Core\Timer.cs" />
     <Compile Include="Data\BitData.cs" />
     <Compile Include="Data\FieldData.cs" />
     <Compile Include="Entities\Cheer.cs" />

@@ -23,7 +23,7 @@ namespace KilobitCup.Data
 			{
 				new FieldData("Message.Top.Offset", FieldTypes.Integer),
 				new FieldData("Message.Spacing", FieldTypes.Integer),
-				new FieldData("Message.Zoom.Time", FieldTypes.Integer),
+				new FieldData("Message.Acceleration", FieldTypes.Integer),
 				new FieldData("Message.Scroll.Speed", FieldTypes.Integer),
 			};
 
@@ -31,7 +31,7 @@ namespace KilobitCup.Data
 
 			TopOffset = (int)values[0];
 			Spacing = (int)values[1];
-			ZoomTime = (int)values[2];
+			Acceleration = (int)values[2];
 			ScrollSpeed = (int)values[3];
 		}
 
@@ -46,12 +46,12 @@ namespace KilobitCup.Data
 		public int Spacing { get; }
 
 		/// <summary>
-		/// Duration for the message entering or leaving the screen (when not scrolling at a fixed rate).
+		/// Message acceleration.
 		/// </summary>
-		public int ZoomTime { get; }
+		public int Acceleration { get; }
 
 		/// <summary>
-		/// Scrolling speed (in pixels per second).
+		/// Fixed scroll speed (in pixels per second).
 		/// </summary>
 		public int ScrollSpeed { get; }
 	}

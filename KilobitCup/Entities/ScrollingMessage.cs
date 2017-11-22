@@ -29,8 +29,8 @@ namespace KilobitCup.Entities
 			"notlikethis",
 			"failfish",
 			"vohiyo",
-			"muxy",
 			"streamlabs",
+			"muxy",
 			"bday",
 			"bitboss",
 			"doodlecheer"
@@ -44,8 +44,11 @@ namespace KilobitCup.Entities
 		private List<SpriteText> textList;
 		private List<Cheer> cheerList;
 		private List<Vector2> offsetList;
+		private Vector2 velocity;
 
 		private bool textFirst;
+		private bool accelerating;
+		private float totalWidth;
 
 		/// <summary>
 		/// Constructs the message. Message tokens are parsed on creation.
@@ -60,6 +63,7 @@ namespace KilobitCup.Entities
 			ComputeOffsets();
 
 			Position = new Vector2(Resolution.Width, data.TopOffset + data.Spacing * messageCount);
+			velocity.X = -data.ScrollSpeed;
 		}
 
 		/// <summary>
@@ -80,6 +84,8 @@ namespace KilobitCup.Entities
 				{
 					cheerList[i].Position = value + offsetList[i * 2 + indexCorrection];
 				}
+
+				base.Position = value;
 			}
 		}
 
@@ -186,13 +192,19 @@ namespace KilobitCup.Entities
 			Vector2 offset = Vector2.Zero;
 			offsetList.Add(offset);
 
-			for (int i = 0; i < textList.Count + cheerList.Count - 1; i++)
+			int offsetCount = textList.Count + cheerList.Count - 1;
+
+			for (int i = 0; i < offsetCount; i++)
 			{
 				bool isTextItem = textFirst ? i % 2 == 0 : i % 2 == 1;
 
 				offset.X += isTextItem ? textList[i / 2].Width : cheerList[i / 2].Width;
 				offsetList.Add(offset);
 			}
+
+			bool textLast = textList.Count == cheerList.Count ? !textFirst : textFirst;
+
+			totalWidth = offset.X + (textLast ? textList.Last().Width : cheerList.Last().Width);
 		}
 
 		/// <summary>
@@ -200,6 +212,26 @@ namespace KilobitCup.Entities
 		/// </summary>
 		public override void Update(float dt)
 		{
+			if (accelerating)
+			{
+				velocity.X -= data.Acceleration * dt;
+				Position += velocity * dt;
+
+				if (Position.X <= -totalWidth)
+				{
+					Scene.Remove(this);
+				}
+			}
+			else
+			{
+				Position -= new Vector2(data.ScrollSpeed * dt, 0);
+
+				if (Position.X <= Resolution.Width / 2 - totalWidth)
+				{
+					accelerating = true;
+				}
+			}
+
 			cheerList.ForEach(c => c.Update(dt));
 		}
 

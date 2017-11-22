@@ -1,4 +1,4 @@
 ﻿Message.Top.Offset = 30
 Message.Spacing = 30
-Message.Zoom.Time = 300
+Message.Acceleration = 2000
 Message.Scroll.Speed = 100

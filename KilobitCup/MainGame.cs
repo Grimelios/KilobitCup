@@ -59,7 +59,7 @@ namespace KilobitCup
 			accumulator = new PhysicsAccumulator(world);
 			scene = new Scene();
 
-			MessageSystem.Send(MessageTypes.Bits, new BitData("cheer10000 Hello vohiyo5000", "Terra21", 5100));
+			MessageSystem.Send(MessageTypes.Bits, new BitData("cheer10000 Hello, and here are some bits! vohiyo5000 What's that? muxy600 You wanted more bits? notlikethis10 You're such a filthy sellout. 4head10000", "Terra21", 5100));
 
 			base.Initialize();
 		}
