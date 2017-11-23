@@ -100,7 +100,11 @@ namespace KilobitCup
 			
 			accumulator.Update(dt);
 			scene.Update(dt);
-			donatorDisplay.Update(dt);
+
+			if (donatorDisplay.Active)
+			{
+				donatorDisplay.Update(dt);
+			}
 		}
 
 		/// <summary>
@@ -112,7 +116,12 @@ namespace KilobitCup
 			
 			spriteBatch.Begin();
 			scene.Draw(spriteBatch);
-			donatorDisplay.Draw(spriteBatch);
+
+			if (donatorDisplay.Active)
+			{
+				donatorDisplay.Draw(spriteBatch);
+			}
+
 			spriteBatch.End();
 		}
 	}

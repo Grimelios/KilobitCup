@@ -21,21 +21,35 @@ namespace KilobitCup.UI
 		private Timer timer;
 
 		private int activationIndex;
+		private int holdTime;
+		private int hiddenCount;
 		private float revealRate;
-		private bool active;
+		private bool revealing;
 
 		/// <summary>
 		/// Constructs the class.
 		/// </summary>
 		public DonatorDisplay()
 		{
-			int charactersPerSecond = int.Parse(PropertyLoader.LoadMap("Properties.txt")["Donator.Reveal.Rate"]);
+			object[] values = PropertyLoader.Load("Properties.txt", new []
+			{
+				new FieldData("Donator.Reveal.Rate", FieldTypes.Integer),
+				new FieldData("Donator.Hold.Time", FieldTypes.Integer),
+			});
+
+			int charactersPerSecond = (int)values[0];
 
 			font = ContentLoader.LoadFont("Donator");
 			revealRate = 1000f / charactersPerSecond;
+			holdTime = (int)values[1];
 
 			MessageSystem.Subscribe(MessageTypes.Bits, this);
 		}
+
+		/// <summary>
+		/// Whether the display is active.
+		/// </summary>
+		public bool Active { get; set; }
 
 		/// <summary>
 		/// Receives messages.
@@ -68,23 +82,69 @@ namespace KilobitCup.UI
 				{
 					float substringLength = font.MeasureString(fullString.Substring(0, i)).X;
 
-					characters[index] = new DonatorCharacter(character, basePosition + new Vector2(substringLength, 0));
+					characters[index] = new DonatorCharacter(character, basePosition + new Vector2(substringLength, 0), this);
 					index++;
 				}
 			}
 
+			CreateActivationTimer();
+			revealing = true;
+			Active = true;
+		}
+
+		/// <summary>
+		/// Creates a repeating timer to active characters.
+		/// </summary>
+		private void CreateActivationTimer()
+		{
+			activationIndex = 0;
+
 			timer = new Timer(revealRate, time =>
 			{
+				// The Activate function is overloaded. It can either trigger the character to reveal itself or hide.
 				characters[activationIndex].Activate(time);
 				activationIndex++;
 
 				if (activationIndex == characters.Length)
 				{
-					timer = null;
+					if (revealing)
+					{
+						CreateHoldTimer();
+					}
+					else
+					{
+						timer = null;
+					}
 				}
-			});
 
-			active = true;
+				return true;
+			});
+		}
+
+		/// <summary>
+		/// Creates the holding timer.
+		/// </summary>
+		private void CreateHoldTimer()
+		{
+			timer = new Timer(holdTime, time =>
+			{
+				revealing = false;
+				CreateActivationTimer();
+			});
+		}
+
+		/// <summary>
+		/// Signals that a character is fully hidden.
+		/// </summary>
+		public void SignalHidden()
+		{
+			hiddenCount++;
+
+			if (hiddenCount == characters.Length)
+			{
+				Active = false;
+				characters = null;
+			}
 		}
 
 		/// <summary>
@@ -92,16 +152,23 @@ namespace KilobitCup.UI
 		/// </summary>
 		public void Update(float dt)
 		{
-			if (!active)
-			{
-				return;
-			}
-
 			timer?.Update(dt);
 
-			foreach (DonatorCharacter character in characters)
+			if (revealing)
 			{
-				character.Update(dt);
+				for (int i = 0; i < activationIndex; i++)
+				{
+					characters[i].Update(dt);
+				}
+			}
+			else
+			{
+				// Donator name uses a waving effect while visible, meaning that it's possible for characters to be hidden out of order.
+				// For safety, it's easiest to just update every character while in the process of hiding.
+				foreach (DonatorCharacter character in characters)
+				{
+					character.Update(dt);
+				}
 			}
 		}
 
@@ -110,9 +177,19 @@ namespace KilobitCup.UI
 		/// </summary>
 		public void Draw(SpriteBatch sb)
 		{
-			foreach (DonatorCharacter character in characters)
+			if (revealing)
 			{
-				character.Draw(sb);
+				for (int i = 0; i < activationIndex; i++)
+				{
+					characters[i].Draw(sb);
+				}
+			}
+			else
+			{
+				foreach (DonatorCharacter character in characters)
+				{
+					character.Draw(sb);
+				}
 			}
 		}
 	}

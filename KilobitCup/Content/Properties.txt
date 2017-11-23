@@ -4,5 +4,6 @@ Message.Acceleration = 2000
 Message.Scroll.Speed = 100
 
 Donator.Offset = 40
-Donator.Reveal.Time = 250
+Donator.Reveal.Time = 500
 Donator.Reveal.Rate = 16
+Donator.Hold.Time = 3000

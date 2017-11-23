@@ -37,14 +37,17 @@ namespace KilobitCup.UI
 		private Vector2 basePosition;
 		private Vector2 targetPosition;
 		private SpriteText spriteText;
-
+		private DonatorDisplay parent;
+		
 		private bool entering;
 
 		/// <summary>
 		/// Constructs the element.
 		/// </summary>
-		public DonatorCharacter(char character, Vector2 position)
+		public DonatorCharacter(char character, Vector2 position, DonatorDisplay parent)
 		{
+			this.parent = parent;
+
 			spriteText = new SpriteText("Donator", character.ToString())
 			{
 				Position = position
@@ -72,14 +75,54 @@ namespace KilobitCup.UI
 		/// </summary>
 		public void Activate(float initialElapsed)
 		{
+			entering = !entering;
+
+			// The timer is paused while holding, so it doesn't need to be recreated a second time.
+			if (!entering)
+			{
+				timer.Paused = false;
+
+				return;
+			}
+
 			timer = new Timer(revealTime, progress =>
 			{
-				Position = Vector2.Lerp(basePosition, targetPosition, progress);
+				Position = entering
+					? Vector2.Lerp(basePosition, targetPosition, EaseOutBack(progress)) 
+					: Vector2.Lerp(targetPosition, basePosition, EaseInBack(progress));
 			}, time =>
 			{
-				timer.Reset();
-				timer.Paused = true;
+				if (entering)
+				{
+					timer.Reset();
+					timer.Paused = true;
+				}
+				else
+				{
+					timer = null;
+					parent.SignalHidden();
+				}
 			}, initialElapsed);
+		}
+
+		/// <summary>
+		/// Computes in-back easing.
+		/// </summary>
+		private float EaseInBack(float amount)
+		{
+			// See https://github.com/warrenm/AHEasing/blob/master/AHEasing/easing.c.
+			return amount * amount - amount * (float)Math.Sin(amount * MathHelper.Pi);
+		}
+
+		/// <summary>
+		/// Computes out-back easing.
+		/// </summary>
+		private float EaseOutBack(float amount)
+		{
+			// See https://github.com/warrenm/AHEasing/blob/master/AHEasing/easing.c.
+			float f = 1 - amount;
+
+			return 1 - (f * f - f * (float)Math.Sin(f * MathHelper.Pi));
 		}
 
 		/// <summary>

@@ -90,7 +90,7 @@ namespace KilobitCup.Core
 		/// </summary>
 		public void Update(float dt)
 		{
-			if (Paused)
+			if (Paused || Complete)
 			{
 				return;
 			}
@@ -105,8 +105,10 @@ namespace KilobitCup.Core
 				{
 					// Calling the tick function in this way prevents having to handle the final tick in the trigger function.
 					tick?.Invoke(1);
-					nonRepeatingTrigger(Elapsed);
 					Complete = true;
+
+					// Complete is intentionally set first because trigger functions can reset the timer.
+					nonRepeatingTrigger(Elapsed);
 
 					return;
 				}
