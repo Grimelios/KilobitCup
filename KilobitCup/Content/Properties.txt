@@ -1,4 +1,8 @@
-﻿Message.Top.Offset = 30
+﻿Message.Offset = 30
 Message.Spacing = 30
 Message.Acceleration = 2000
 Message.Scroll.Speed = 100
+
+Donator.Offset = 40
+Donator.Reveal.Time = 250
+Donator.Reveal.Rate = 16

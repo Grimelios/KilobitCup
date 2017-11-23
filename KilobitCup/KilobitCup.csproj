@@ -75,6 +75,10 @@
     <Compile Include="Resolution.cs" />
     <Compile Include="Twitch\BitListener.cs" />
     <Compile Include="Twitch\TwitchAPI.cs" />
+    <Compile Include="UI\DonatorCharacter.cs" />
+    <Compile Include="UI\DonatorDisplay.cs" />
+    <Compile Include="UI\DonatorName.cs" />
+    <Compile Include="UI\UIElement.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -100,7 +104,8 @@
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="app.manifest" />
-    <None Include="Content\Fonts\Default.spritefont" />
+    <None Include="Content\Fonts\Donator.spritefont" />
+    <None Include="Content\Fonts\Message.spritefont" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

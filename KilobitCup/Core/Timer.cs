@@ -12,9 +12,6 @@ namespace KilobitCup.Core
 	/// </summary>
 	public class Timer : IDynamic
 	{
-		private float elapsed;
-		private float duration;
-
 		private Action<float> tick;
 		private Action<float> nonRepeatingTrigger;
 		private Func<float, bool> repeatingTrigger;
@@ -22,7 +19,7 @@ namespace KilobitCup.Core
 		/// <summary>
 		/// Constructs the timer.
 		/// </summary>
-		public Timer(float duration, Action<float> nonRepeatingTrigger) :
+		public Timer(float duration, Action<float> nonRepeatingTrigger, float initialElapsed = 0) :
 			this(duration, null, nonRepeatingTrigger)
 		{
 		}
@@ -30,17 +27,19 @@ namespace KilobitCup.Core
 		/// <summary>
 		/// Constructs the timer.
 		/// </summary>
-		public Timer(float duration, Action<float> tick, Action<float> nonRepeatingTrigger)
+		public Timer(float duration, Action<float> tick, Action<float> nonRepeatingTrigger, float initialElapsed = 0)
 		{
-			this.duration = duration;
 			this.tick = tick;
 			this.nonRepeatingTrigger = nonRepeatingTrigger;
+
+			Duration = duration;
+			Elapsed = initialElapsed;
 		}
 
 		/// <summary>
 		/// Constructs the timer.
 		/// </summary>
-		public Timer(float duration, Func<float, bool> repeatingTrigger) :
+		public Timer(float duration, Func<float, bool> repeatingTrigger, float initialElapsed = 0) :
 			this(duration, null, repeatingTrigger)
 		{
 		}
@@ -48,12 +47,24 @@ namespace KilobitCup.Core
 		/// <summary>
 		/// Constructs the timer.
 		/// </summary>
-		public Timer(float duration, Action<float> tick, Func<float, bool> repeatingTrigger)
+		public Timer(float duration, Action<float> tick, Func<float, bool> repeatingTrigger, float initialElapsed = 0)
 		{
-			this.duration = duration;
 			this.tick = tick;
 			this.repeatingTrigger = repeatingTrigger;
+
+			Duration = duration;
+			Elapsed = initialElapsed;
 		}
+
+		/// <summary>
+		/// Elapsed time.
+		/// </summary>
+		public float Elapsed { get; private set; }
+
+		/// <summary>
+		/// Timer duration.
+		/// </summary>
+		public float Duration { get; set; }
 
 		/// <summary>
 		/// Whether the timer is complete.
@@ -61,28 +72,47 @@ namespace KilobitCup.Core
 		public bool Complete { get; private set; }
 
 		/// <summary>
+		/// Whether the timer is paused.
+		/// </summary>
+		public bool Paused { get; set; }
+
+		/// <summary>
+		/// Resets the timer.
+		/// </summary>
+		public void Reset()
+		{
+			Elapsed = 0;
+			Complete = false;
+		}
+
+		/// <summary>
 		/// Updates the class.
 		/// </summary>
 		public void Update(float dt)
 		{
-			elapsed += dt * 1000;
-
-			while (elapsed > duration)
+			if (Paused)
 			{
-				elapsed -= duration;
+				return;
+			}
+
+			Elapsed += dt * 1000;
+
+			while (Elapsed > Duration)
+			{
+				Elapsed -= Duration;
 
 				if (nonRepeatingTrigger != null)
 				{
 					// Calling the tick function in this way prevents having to handle the final tick in the trigger function.
 					tick?.Invoke(1);
-					nonRepeatingTrigger(elapsed);
+					nonRepeatingTrigger(Elapsed);
 					Complete = true;
 
 					return;
 				}
 
 				// Repeating triggers can return false to end the timer early.
-				if (!repeatingTrigger(elapsed))
+				if (!repeatingTrigger(Elapsed))
 				{
 					Complete = true;
 
@@ -90,7 +120,7 @@ namespace KilobitCup.Core
 				}
 			}
 
-			tick?.Invoke(elapsed / duration);
+			tick?.Invoke(Elapsed / Duration);
 		}
 	}
 }

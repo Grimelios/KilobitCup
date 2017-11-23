@@ -27,8 +27,8 @@ namespace KilobitCup
 
 			if (!cache.TryGetValue(filename, out map))
 			{
+				// The map is cached within the LoadMap function.
 				map = LoadMap(filename);
-				cache.Add(filename, map);
 			}
 
 			object[] values = new object[dataArray.Length];
@@ -44,7 +44,7 @@ namespace KilobitCup
 		/// <summary>
 		/// Loads a property map from the given file.
 		/// </summary>
-		private static PropertyMap LoadMap(string filename)
+		public static PropertyMap LoadMap(string filename)
 		{
 			PropertyMap map = new PropertyMap();
 
@@ -61,6 +61,8 @@ namespace KilobitCup
 
 				map.Add(key, value);
 			}
+
+			cache.Add(filename, map);
 
 			return map;
 		}

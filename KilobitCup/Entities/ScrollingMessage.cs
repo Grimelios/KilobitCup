@@ -64,7 +64,7 @@ namespace KilobitCup.Entities
 			ComputeTokens(message);
 			ComputeOffsets();
 
-			Position = new Vector2(Resolution.Width, data.TopOffset + data.Spacing * messageCount);
+			Position = new Vector2(Resolution.Width, data.Offset + data.Spacing * messageCount);
 			velocity.X = -data.ScrollSpeed;
 		}
 
@@ -100,7 +100,7 @@ namespace KilobitCup.Entities
 			int cheerIndex;
 			int cheerLength;
 
-			SpriteFont font = ContentLoader.LoadFont("Default");
+			SpriteFont font = ContentLoader.LoadFont("Message");
 
 			while (ParseNextCheer(message, index, out cheerIndex, out cheerLength))
 			{

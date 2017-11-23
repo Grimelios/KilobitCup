@@ -21,7 +21,7 @@ namespace KilobitCup.Data
 		{
 			dataArray = new []
 			{
-				new FieldData("Message.Top.Offset", FieldTypes.Integer),
+				new FieldData("Message.Offset", FieldTypes.Integer),
 				new FieldData("Message.Spacing", FieldTypes.Integer),
 				new FieldData("Message.Acceleration", FieldTypes.Integer),
 				new FieldData("Message.Scroll.Speed", FieldTypes.Integer),
@@ -29,7 +29,7 @@ namespace KilobitCup.Data
 
 			object[] values = PropertyLoader.Load("Properties.txt", dataArray);
 
-			TopOffset = (int)values[0];
+			Offset = (int)values[0];
 			Spacing = (int)values[1];
 			Acceleration = (int)values[2];
 			ScrollSpeed = (int)values[3];
@@ -38,7 +38,7 @@ namespace KilobitCup.Data
 		/// <summary>
 		/// Offset from the top edge of the screen.
 		/// </summary>
-		public int TopOffset { get; }
+		public int Offset { get; }
 
 		/// <summary>
 		/// Vertical spacing between messages.

@@ -32,7 +32,6 @@ namespace KilobitCup.Core
 		/// <summary>
 		/// Updates the component.
 		/// </summary>
-		/// <param name="dt"></param>
 		public virtual void Update(float dt)
 		{
 		}

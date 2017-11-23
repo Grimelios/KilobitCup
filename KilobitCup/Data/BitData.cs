@@ -14,10 +14,11 @@ namespace KilobitCup.Data
 		/// <summary>
 		/// Constructs the class.
 		/// </summary>
-		public BitData(string message, string username, int totalBits)
+		public BitData(string message, string username, int bits, int totalBits)
 		{
 			Message = message;
 			Username = username;
+			Bits = bits;
 			TotalBits = totalBits;
 		}
 
@@ -30,6 +31,11 @@ namespace KilobitCup.Data
 		/// Username of the person who donated.
 		/// </summary>
 		public string Username { get; }
+
+		/// <summary>
+		/// Total bits donated in the current message.
+		/// </summary>
+		public int Bits { get; }
 
 		/// <summary>
 		/// Total number of bits donated by the user.

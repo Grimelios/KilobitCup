@@ -6,6 +6,7 @@ using KilobitCup.Entities;
 using KilobitCup.Interfaces;
 using KilobitCup.Physics;
 using KilobitCup.Twitch;
+using KilobitCup.UI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -26,6 +27,7 @@ namespace KilobitCup
 		private BitListener bitListener;
 		private PhysicsAccumulator accumulator;
 		private Scene scene;
+		private DonatorDisplay donatorDisplay;
 
 		/// <summary>
 		/// Constructs the class.
@@ -58,12 +60,13 @@ namespace KilobitCup
 			bitListener = new BitListener();
 			accumulator = new PhysicsAccumulator(world);
 			scene = new Scene();
+			donatorDisplay = new DonatorDisplay();
 
 			MessageSystem.Send(MessageTypes.Bits, new BitData("Cheer cheer10000 RIPCheer ripcheer10000 Kappa kappa10000 Kreygasm" +
 			                                                  "kreygasm10000 SwiftRage swiftrage10000 4Head 4head10000 PJSalt pjsalt10000 " +
 			                                                  "MrDestructoid mrdestructoid10000 TriHard trihard10000 NotLikeThis notlikethis10000 " +
 			                                                  "FailFish failfish10000 VoHiYo vohiyo10000 StreamLabs streamlabs10000 Muxy muxy10000 " +
-			                                                  "BDay bday10000 BitBoss bitboss10000 DoodleCheer doodlecheer10000", "Terra21", 5100));
+			                                                  "BDay bday10000 BitBoss bitboss10000 DoodleCheer doodlecheer10000", "oshiimine", 10, 10000));
 
 			Vector2 topLeft = new Vector2(75, 0);
 			Vector2 topRight = new Vector2(Resolution.Width - 75, 0);
@@ -97,6 +100,7 @@ namespace KilobitCup
 			
 			accumulator.Update(dt);
 			scene.Update(dt);
+			donatorDisplay.Update(dt);
 		}
 
 		/// <summary>
@@ -108,6 +112,7 @@ namespace KilobitCup
 			
 			spriteBatch.Begin();
 			scene.Draw(spriteBatch);
+			donatorDisplay.Draw(spriteBatch);
 			spriteBatch.End();
 		}
 	}

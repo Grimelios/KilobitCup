@@ -14,13 +14,6 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin Fonts/Default.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:Fonts/Default.spritefont
-
 #begin Textures/Kappa.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -457,4 +450,18 @@
 /importer:GifImporter
 /processor:GifProcessor
 /build:Gifs/VoHiYo4.xgif
+
+#begin Fonts/Message.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/Message.spritefont
+
+#begin Fonts/Donator.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/Donator.spritefont
 
