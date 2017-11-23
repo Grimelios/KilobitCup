@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using KilobitCup.Core;
 using KilobitCup.Data;
+using KilobitCup.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -258,6 +259,8 @@ namespace KilobitCup.Entities
 				if (releaseIndex == cheerList.Count)
 				{
 					accelerating = true;
+
+					MessageSystem.Send(MessageTypes.MessageComplete, null);
 				}
 			}
 		}

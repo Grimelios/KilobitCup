@@ -21,10 +21,11 @@ namespace KilobitCup.UI
 		private Timer timer;
 
 		private int activationIndex;
-		private int holdTime;
 		private int hiddenCount;
+		private int minimumHoldTime;
 		private float revealRate;
 		private bool revealing;
+		private bool messageComplete;
 
 		/// <summary>
 		/// Constructs the class.
@@ -34,16 +35,17 @@ namespace KilobitCup.UI
 			object[] values = PropertyLoader.Load("Properties.txt", new []
 			{
 				new FieldData("Donator.Reveal.Rate", FieldTypes.Integer),
-				new FieldData("Donator.Hold.Time", FieldTypes.Integer),
+				new FieldData("Donator.Minimum.Hold.Time", FieldTypes.Integer)
 			});
 
 			int charactersPerSecond = (int)values[0];
 
 			font = ContentLoader.LoadFont("Donator");
 			revealRate = 1000f / charactersPerSecond;
-			holdTime = (int)values[1];
+			minimumHoldTime = (int)values[1];
 
 			MessageSystem.Subscribe(MessageTypes.Bits, this);
+			MessageSystem.Subscribe(MessageTypes.MessageComplete, this);
 		}
 
 		/// <summary>
@@ -56,7 +58,23 @@ namespace KilobitCup.UI
 		/// </summary>
 		public void Receive(MessageTypes messageType, object data)
 		{
-			HandleBits((BitData)data);
+			switch (messageType)
+			{
+				case MessageTypes.Bits:
+					HandleBits((BitData)data);
+					break;
+
+				case MessageTypes.MessageComplete:
+					messageComplete = true;
+					
+					// The timer NOT being null indicates that the minimum holding time has not yet passed.
+					if (timer == null)
+					{
+						CreateActivationTimer();
+					}
+
+					break;
+			}
 		}
 
 		/// <summary>
@@ -126,10 +144,20 @@ namespace KilobitCup.UI
 		/// </summary>
 		private void CreateHoldTimer()
 		{
-			timer = new Timer(holdTime, time =>
+			timer = new Timer(minimumHoldTime, time =>
 			{
 				revealing = false;
-				CreateActivationTimer();
+
+				// Donator messages stay on screen until their message begins to accelerate off-screen (unless the message finishes before
+				// the minimum holding time has elapsed).
+				if (messageComplete)
+				{
+					CreateActivationTimer();
+				}
+				else
+				{
+					timer = null;
+				}
 			});
 		}
 

@@ -11,7 +11,8 @@ namespace KilobitCup.Interfaces
 	/// </summary>
 	public enum MessageTypes
 	{
-		Bits
+		Bits,
+		MessageComplete
 	}
 
 	/// <summary>
