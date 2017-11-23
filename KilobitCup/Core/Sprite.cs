@@ -35,11 +35,21 @@ namespace KilobitCup.Core
 		}
 
 		/// <summary>
+		/// Sprite width.
+		/// </summary>
+		public int Width => texture.Width;
+
+		/// <summary>
+		/// Sprite height.
+		/// </summary>
+		public int Height => texture.Height;
+
+		/// <summary>
 		/// Draws the sprite.
 		/// </summary>
 		public override void Draw(SpriteBatch sb)
 		{
-			sb.Draw(texture, Position, null, Color, Rotation, origin, 1, SpriteEffects.None, 0);
+			sb.Draw(texture, Position, null, Color, Rotation, origin, Scale, SpriteEffects.None, 0);
 		}
 	}
 }

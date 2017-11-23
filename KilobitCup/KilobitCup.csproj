@@ -50,6 +50,7 @@
     <Compile Include="Core\Timer.cs" />
     <Compile Include="Data\BitData.cs" />
     <Compile Include="Data\FieldData.cs" />
+    <Compile Include="EaseFunctions.cs" />
     <Compile Include="Entities\Cheer.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\Scene.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="Interfaces\IPositionable.cs" />
     <Compile Include="Interfaces\IRenderable.cs" />
     <Compile Include="Interfaces\IRotatable.cs" />
+    <Compile Include="Interfaces\IScalable.cs" />
     <Compile Include="MainGame.cs" />
     <Compile Include="MessageSystem.cs" />
     <Compile Include="Paths.cs" />

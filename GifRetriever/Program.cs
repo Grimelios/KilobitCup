@@ -44,8 +44,6 @@ namespace GifRetriever
 		{
 			string json = await TwitchAPI.GetWebResponse("https://api.twitch.tv/kraken/bits/actions", true);
 
-			Type cheerType = typeof(CheerTypes);
-
 			// The last entry in CheerTypes is an invalid marker.
 			int cheerCount = CoreFunctions.EnumCount<CheerTypes>() - 1;
 

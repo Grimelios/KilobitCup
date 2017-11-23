@@ -62,7 +62,7 @@ namespace KilobitCup
 			scene = new Scene();
 			donatorDisplay = new DonatorDisplay();
 
-			MessageSystem.Send(MessageTypes.Bits, new BitData("trihard100000", "oshiimine", 10, 10000));
+			MessageSystem.Send(MessageTypes.Bits, new BitData("Here, have some bits! cheer1000", "oshiimine", 10, 10000));
 
 			Vector2 topLeft = new Vector2(75, 0);
 			Vector2 topRight = new Vector2(Resolution.Width - 75, 0);

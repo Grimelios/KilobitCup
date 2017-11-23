@@ -16,9 +16,33 @@ namespace KilobitCup.UI
 	/// </summary>
 	public class DonatorDisplay : IMessageReceiver, IDynamic, IRenderable
 	{
+		private static readonly int[] BitBadgeThresholds =
+		{
+			1,
+			100,
+			1000,
+			5000,
+			10000,
+			25000,
+			50000,
+			75000,
+			100000,
+			200000,
+			300000,
+			400000,
+			500000,
+			600000,
+			700000,
+			800000,
+			900000,
+			1000000
+		};
+
+		private Sprite badge;
 		private SpriteFont font;
 		private DonatorCharacter[] characters;
-		private Timer timer;
+		private Timer characterTimer;
+		private Timer badgeTimer;
 
 		private int activationIndex;
 		private int hiddenCount;
@@ -68,7 +92,7 @@ namespace KilobitCup.UI
 					messageComplete = true;
 					
 					// The timer NOT being null indicates that the minimum holding time has not yet passed.
-					if (timer == null)
+					if (characterTimer == null)
 					{
 						CreateActivationTimer();
 					}
@@ -82,6 +106,8 @@ namespace KilobitCup.UI
 		/// </summary>
 		private void HandleBits(BitData data)
 		{
+			CreateBadge(data.TotalBits);
+
 			string bitSuffix = data.Bits > 1 ? "bits" : "bit";
 			string fullString = $"{data.Username} donated {data.Bits} {bitSuffix}!";
 
@@ -89,8 +115,12 @@ namespace KilobitCup.UI
 			characters = new DonatorCharacter[fullString.Length - 3];
 
 			int index = 0;
+			int fullWidth = (int)font.MeasureString(fullString).X + badge.Width;
 
-			Vector2 basePosition = new Vector2(Resolution.Width / 2 - font.MeasureString(fullString).X / 2, Resolution.Height);
+			Vector2 basePosition = new Vector2((Resolution.Width - fullWidth) / 2, Resolution.Height);
+			Vector2 textPosition = basePosition + new Vector2(badge.Width, 0);
+
+			badge.Position = basePosition - new Vector2(0, 40);
 
 			for (int i = 0; i < fullString.Length; i++)
 			{
@@ -100,7 +130,7 @@ namespace KilobitCup.UI
 				{
 					float substringLength = font.MeasureString(fullString.Substring(0, i)).X;
 
-					characters[index] = new DonatorCharacter(character, basePosition + new Vector2(substringLength, 0), this);
+					characters[index] = new DonatorCharacter(character, textPosition + new Vector2(substringLength, 0), this);
 					index++;
 				}
 			}
@@ -111,13 +141,54 @@ namespace KilobitCup.UI
 		}
 
 		/// <summary>
+		/// Creates a sprite for the badge. Badge type is determined from the total number of bits donated by the user. Also creates the
+		/// badge timer.
+		/// </summary>
+		private void CreateBadge(int totalBits)
+		{
+			int badgeLevel = 0;
+
+			while (badgeLevel < BitBadgeThresholds.Length - 1 && totalBits >= BitBadgeThresholds[badgeLevel + 1])
+			{
+				badgeLevel++;
+			}
+
+			badge = new Sprite("Badges/BitBadge" + badgeLevel)
+			{
+				Scale = 0
+			};
+
+			badgeTimer = new Timer(400, time =>
+			{
+				CreateBadgeTimer();
+			});
+		}
+
+		/// <summary>
+		/// Creates a timer for expanding or shrinking the badge.
+		/// </summary>
+		private void CreateBadgeTimer()
+		{
+			badgeTimer = new Timer(1000, progress =>
+			{
+				float amount = MathHelper.Lerp(0, 1, EaseFunctions.Ease(progress, EaseTypes.EaseOutBack));
+
+				badge.Scale = amount;
+				badge.Rotation = amount * MathHelper.TwoPi;
+			}, time =>
+			{
+				badgeTimer = null;
+			});
+		}
+
+		/// <summary>
 		/// Creates a repeating timer to active characters.
 		/// </summary>
 		private void CreateActivationTimer()
 		{
 			activationIndex = 0;
 
-			timer = new Timer(revealRate, time =>
+			characterTimer = new Timer(revealRate, time =>
 			{
 				// The Activate function is overloaded. It can either trigger the character to reveal itself or hide.
 				characters[activationIndex].Activate(time);
@@ -131,7 +202,7 @@ namespace KilobitCup.UI
 					}
 					else
 					{
-						timer = null;
+						characterTimer = null;
 					}
 				}
 
@@ -144,7 +215,7 @@ namespace KilobitCup.UI
 		/// </summary>
 		private void CreateHoldTimer()
 		{
-			timer = new Timer(minimumHoldTime, time =>
+			characterTimer = new Timer(minimumHoldTime, time =>
 			{
 				revealing = false;
 
@@ -156,7 +227,7 @@ namespace KilobitCup.UI
 				}
 				else
 				{
-					timer = null;
+					characterTimer = null;
 				}
 			});
 		}
@@ -180,7 +251,8 @@ namespace KilobitCup.UI
 		/// </summary>
 		public void Update(float dt)
 		{
-			timer?.Update(dt);
+			characterTimer?.Update(dt);
+			badgeTimer?.Update(dt);
 
 			if (revealing)
 			{
@@ -205,6 +277,8 @@ namespace KilobitCup.UI
 		/// </summary>
 		public void Draw(SpriteBatch sb)
 		{
+			badge?.Draw(sb);
+
 			if (revealing)
 			{
 				for (int i = 0; i < activationIndex; i++)
