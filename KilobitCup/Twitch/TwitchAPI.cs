@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using KilobitCup.Forms;
 
 namespace KilobitCup.Twitch
 {
@@ -13,7 +14,10 @@ namespace KilobitCup.Twitch
 	/// </summary>
 	public static class TwitchAPI
 	{
-		private const string ClientID = "zulz2i7hm8u5vofu2095940hrq81nx";
+		/// <summary>
+		/// Client ID for the application.
+		/// </summary>
+		public const string ClientID = "zulz2i7hm8u5vofu2095940hrq81nx";
 
 		/// <summary>
 		/// Sends a web request to Twitch using the given URL. The response Json is returned.
@@ -38,6 +42,16 @@ namespace KilobitCup.Twitch
 			{
 				return reader.ReadToEnd();
 			}
+		}
+
+		/// <summary>
+		/// Gets an authorization token by displaying a temporary form allowing users to log in.
+		/// </summary>
+		public static string GetAuthorizationToken()
+		{
+			new AuthorizationForm().Show();
+
+			return null;
 		}
 	}
 }

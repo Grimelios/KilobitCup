@@ -40,23 +40,23 @@ namespace KilobitCup.Twitch
 			string json = await TwitchAPI.GetWebResponse("https://api.twitch.tv/kraken/channels/grimelios");
 			string userID = ParseChannelID(json);
 
+			TwitchAPI.GetAuthorizationToken();
+
 			return;
 
 			//channelID = await GetID("https://api.twitch.tv/kraken/channel", "Twitch_OAuth");
 
-			JObject dataObject = new JObject
-			{
-				{ "topics", new JArray("channel-bits-events-v1." + channelID) },
-				{ "auth_token", channelID }
-			};
+			JObject dataObject = new JObject(
+				new JProperty("topics", "channel-bits-events-v1." + userID),
+				new JProperty("auth_token", null)
+			);
 
-			JObject jObject = new JObject
-			{
-				{ "type", "LISTEN" },
-				{ "data", dataObject }
-			};
+			JObject fullObject = new JObject(
+				new JProperty("type", "LISTEN"),
+				new JProperty("data", dataObject)
+			);
 
-			socket.Send(jObject.ToString());
+			socket.Send(fullObject.ToString());
 		}
 
 		/// <summary>
