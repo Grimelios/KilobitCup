@@ -5,6 +5,8 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using KilobitCup.Data;
+using KilobitCup.Interfaces;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using WebSocketSharp;
@@ -39,16 +41,11 @@ namespace KilobitCup.Twitch
 		{
 			string json = await TwitchAPI.GetWebResponse("https://api.twitch.tv/kraken/channels/grimelios");
 			string userID = ParseChannelID(json);
-
-			TwitchAPI.GetAuthorizationToken();
-
-			return;
-
-			//channelID = await GetID("https://api.twitch.tv/kraken/channel", "Twitch_OAuth");
+			string token = TwitchAPI.GetAuthorizationToken();
 
 			JObject dataObject = new JObject(
-				new JProperty("topics", "channel-bits-events-v1." + userID),
-				new JProperty("auth_token", null)
+				new JProperty("topics", new JArray("channel-bits-events-v1." + userID)),
+				new JProperty("auth_token", token)
 			);
 
 			JObject fullObject = new JObject(
@@ -85,6 +82,33 @@ namespace KilobitCup.Twitch
 		/// </summary>
 		private void OnMessage(object sender, MessageEventArgs e)
 		{
+			JObject json = JObject.Parse(e.Data);
+
+			string type = json["type"].Value<string>();
+
+			// The initial listen response has a type of RESPONSE.
+			if (type == "MESSAGE")
+			{
+				ParseBits(e.Data);
+			}
+		}
+
+		/// <summary>
+		/// Parses and sends a bit donation event.
+		/// </summary>
+		private void ParseBits(string json)
+		{
+			JObject response = JObject.Parse(json);
+			JObject message = JObject.Parse(response["data"]["message"].Value<string>());
+			JToken data = message["data"];
+
+			string user = data["user_name"].Value<string>();
+			string chatMessage = data["chat_message"].Value<string>();
+
+			int bits = data["bits_used"].Value<int>();
+			int totalBits = data["total_bits_used"].Value<int>();
+
+			MessageSystem.Send(MessageTypes.Bits, new BitData(chatMessage, user, bits, totalBits));
 		}
 	}
 }

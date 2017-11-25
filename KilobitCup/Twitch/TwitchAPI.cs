@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using KilobitCup.Forms;
 
 namespace KilobitCup.Twitch
@@ -14,11 +15,6 @@ namespace KilobitCup.Twitch
 	/// </summary>
 	public static class TwitchAPI
 	{
-		/// <summary>
-		/// Client ID for the application.
-		/// </summary>
-		public const string ClientID = "zulz2i7hm8u5vofu2095940hrq81nx";
-
 		/// <summary>
 		/// Sends a web request to Twitch using the given URL. The response Json is returned.
 		/// </summary>
@@ -33,7 +29,7 @@ namespace KilobitCup.Twitch
 				request.Accept = "application/vnd.twitchtv.v5+json";
 			}
 
-			request.Headers.Add("Client-ID", ClientID);
+			request.Headers.Add("Client-ID", Program.ClientID);
 			request.Headers.Add("Authorization", "OAuth " + Environment.GetEnvironmentVariable("Kilobit_Secret"));
 
 			HttpWebResponse response = (HttpWebResponse)request.GetResponse();
@@ -49,7 +45,14 @@ namespace KilobitCup.Twitch
 		/// </summary>
 		public static string GetAuthorizationToken()
 		{
-			new AuthorizationForm().Show();
+			AuthorizationForm form = new AuthorizationForm();
+			form.ShowDialog();
+
+			// This indicates that the user authorized the program.
+			if (form.DialogResult == DialogResult.OK)
+			{
+				return form.AccessToken;
+			}
 
 			return null;
 		}

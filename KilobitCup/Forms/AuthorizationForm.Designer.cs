@@ -39,6 +39,7 @@
 			this.webBrowser.ScrollBarsEnabled = false;
 			this.webBrowser.Size = new System.Drawing.Size(363, 443);
 			this.webBrowser.TabIndex = 0;
+			this.webBrowser.Navigated += new System.Windows.Forms.WebBrowserNavigatedEventHandler(this.webBrowser_Navigated);
 			// 
 			// AuthorizationForm
 			// 
