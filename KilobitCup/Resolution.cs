@@ -14,11 +14,11 @@ namespace KilobitCup
 		/// <summary>
 		/// Window width.
 		/// </summary>
-		public const int Width = 400;
+		public const int Width = 600;
 
 		/// <summary>
 		/// Window height.
 		/// </summary>
-		public const int Height = 300;
+		public const int Height = 400;
 	}
 }

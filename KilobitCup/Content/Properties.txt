@@ -1,9 +1,13 @@
 ﻿Message.Offset = 30
 Message.Spacing = 30
 Message.Acceleration = 2000
-Message.Scroll.Speed = 100
+Message.Scroll.Speed = 250
 
-Donator.Offset = 40
+Donator.Offset.1 = 90
+Donator.Offset.2 = 40
 Donator.Reveal.Time = 500
 Donator.Reveal.Rate = 16
+Donator.Badge.Delay = 200
+Donator.Badge.Spacing = 10
+Donator.Badge.Spin.Time = 1000
 Donator.Minimum.Hold.Time = 3000

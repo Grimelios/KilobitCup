@@ -15,24 +15,6 @@ namespace KilobitCup.UI
 	/// </summary>
 	public class DonatorCharacter : UIElement
 	{
-		private static int offset;
-		private static int revealTime;
-
-		/// <summary>
-		/// Static initialize for the class.
-		/// </summary>
-		static DonatorCharacter()
-		{
-			object[] values = PropertyLoader.Load("Properties.txt", new []
-			{
-				new FieldData("Donator.Offset", FieldTypes.Integer),
-				new FieldData("Donator.Reveal.Time", FieldTypes.Integer),
-			});
-
-			offset = (int)values[0];
-			revealTime = (int)values[1];
-		}
-
 		private Timer timer;
 		private Vector2 basePosition;
 		private Vector2 targetPosition;
@@ -44,7 +26,7 @@ namespace KilobitCup.UI
 		/// <summary>
 		/// Constructs the element.
 		/// </summary>
-		public DonatorCharacter(char character, Vector2 position, DonatorDisplay parent)
+		public DonatorCharacter(char character, Vector2 position, int offset, DonatorDisplay parent)
 		{
 			this.parent = parent;
 
@@ -73,7 +55,7 @@ namespace KilobitCup.UI
 		/// <summary>
 		/// Activates the character to pop up from below the screen.
 		/// </summary>
-		public void Activate(float initialElapsed)
+		public void Activate(int revealTime, float initialElapsed)
 		{
 			entering = !entering;
 

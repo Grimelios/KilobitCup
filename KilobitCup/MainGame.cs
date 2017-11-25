@@ -57,10 +57,12 @@ namespace KilobitCup
 			GraphicsUtilities.Device = GraphicsDevice;
 			PhysicsFactory.Initialize(world);
 
-			bitListener = new BitListener();
+			//bitListener = new BitListener();
 			accumulator = new PhysicsAccumulator(world);
 			scene = new Scene();
 			donatorDisplay = new DonatorDisplay();
+
+			MessageSystem.Send(MessageTypes.Bits, new BitData("oshiimine", "cheer1 Get cheer100 rekt cheer1000 Vulajin cheer5000", 1100, 5000));
 
 			Vector2 topLeft = new Vector2(75, 0);
 			Vector2 topRight = new Vector2(Resolution.Width - 75, 0);

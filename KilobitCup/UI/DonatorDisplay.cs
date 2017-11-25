@@ -40,14 +40,15 @@ namespace KilobitCup.UI
 
 		private Sprite badge;
 		private SpriteFont font;
+		private DonatorData data;
 		private DonatorCharacter[] characters;
 		private Timer characterTimer;
 		private Timer badgeTimer;
 
 		private int activationIndex;
 		private int hiddenCount;
-		private int minimumHoldTime;
-		private float revealRate;
+		private int fontSize;
+
 		private bool revealing;
 		private bool messageComplete;
 
@@ -56,17 +57,9 @@ namespace KilobitCup.UI
 		/// </summary>
 		public DonatorDisplay()
 		{
-			object[] values = PropertyLoader.Load("Properties.txt", new []
-			{
-				new FieldData("Donator.Reveal.Rate", FieldTypes.Integer),
-				new FieldData("Donator.Minimum.Hold.Time", FieldTypes.Integer)
-			});
-
-			int charactersPerSecond = (int)values[0];
-
+			data = new DonatorData();
 			font = ContentLoader.LoadFont("Donator");
-			revealRate = 1000f / charactersPerSecond;
-			minimumHoldTime = (int)values[1];
+			fontSize = (int)font.MeasureString("A").Y;
 
 			MessageSystem.Subscribe(MessageTypes.Bits, this);
 			MessageSystem.Subscribe(MessageTypes.MessageComplete, this);
@@ -104,23 +97,23 @@ namespace KilobitCup.UI
 		/// <summary>
 		/// Handles bit events.
 		/// </summary>
-		private void HandleBits(BitData data)
+		private void HandleBits(BitData bitData)
 		{
-			CreateBadge(data.TotalBits);
+			CreateBadge(bitData.TotalBits);
 
-			string bitSuffix = data.Bits > 1 ? "bits" : "bit";
-			string fullString = $"{data.Username} donated {data.Bits} {bitSuffix}!";
+			string bitSuffix = bitData.Bits > 1 ? "bits" : "bit";
+			string fullString = $"{bitData.Username} donated {bitData.Bits} {bitSuffix}!";
 
 			// The full string contains three spaces.
 			characters = new DonatorCharacter[fullString.Length - 3];
 
 			int index = 0;
-			int fullWidth = (int)font.MeasureString(fullString).X + badge.Width;
+			int fullWidth = (int)font.MeasureString(fullString).X + badge.Width + data.BadgeSpacing;
 
 			Vector2 basePosition = new Vector2((Resolution.Width - fullWidth) / 2, Resolution.Height);
-			Vector2 textPosition = basePosition + new Vector2(badge.Width, 0);
+			Vector2 textPosition = basePosition + new Vector2(badge.Width + data.BadgeSpacing, 0);
 
-			badge.Position = basePosition - new Vector2(0, 40);
+			badge.Position = basePosition + new Vector2(badge.Width / 2, fontSize / 2 - data.Offset1);
 
 			for (int i = 0; i < fullString.Length; i++)
 			{
@@ -130,13 +123,14 @@ namespace KilobitCup.UI
 				{
 					float substringLength = font.MeasureString(fullString.Substring(0, i)).X;
 
-					characters[index] = new DonatorCharacter(character, textPosition + new Vector2(substringLength, 0), this);
+					characters[index] = new DonatorCharacter(character, textPosition + new Vector2(substringLength, 0), data.Offset1,
+						this);
 					index++;
 				}
 			}
 
-			CreateActivationTimer();
 			revealing = true;
+			CreateActivationTimer();
 			Active = true;
 		}
 
@@ -158,7 +152,7 @@ namespace KilobitCup.UI
 				Scale = 0
 			};
 
-			badgeTimer = new Timer(400, time =>
+			badgeTimer = new Timer(data.BadgeDelay, time =>
 			{
 				CreateBadgeTimer();
 			});
@@ -169,9 +163,11 @@ namespace KilobitCup.UI
 		/// </summary>
 		private void CreateBadgeTimer()
 		{
-			badgeTimer = new Timer(1000, progress =>
+			badgeTimer = new Timer(data.BadgeSpinTime, progress =>
 			{
-				float amount = MathHelper.Lerp(0, 1, EaseFunctions.Ease(progress, EaseTypes.EaseOutBack));
+				float amount = revealing
+					? MathHelper.Lerp(0, 1, EaseFunctions.Ease(progress, EaseTypes.EaseOutBack))
+					: MathHelper.Lerp(1, 0, EaseFunctions.Ease(progress, EaseTypes.EaseInBack));
 
 				badge.Scale = amount;
 				badge.Rotation = amount * MathHelper.TwoPi;
@@ -182,16 +178,15 @@ namespace KilobitCup.UI
 		}
 
 		/// <summary>
-		/// Creates a repeating timer to active characters.
+		/// Creates a repeating timer to activate characters.
 		/// </summary>
 		private void CreateActivationTimer()
 		{
 			activationIndex = 0;
-
-			characterTimer = new Timer(revealRate, time =>
+			characterTimer = new Timer(data.RevealRate, time =>
 			{
 				// The Activate function is overloaded. It can either trigger the character to reveal itself or hide.
-				characters[activationIndex].Activate(time);
+				characters[activationIndex].Activate(data.RevealTime, time);
 				activationIndex++;
 
 				if (activationIndex == characters.Length)
@@ -208,6 +203,11 @@ namespace KilobitCup.UI
 
 				return true;
 			});
+
+			if (!revealing)
+			{
+				CreateBadgeTimer();
+			}
 		}
 
 		/// <summary>
@@ -215,7 +215,7 @@ namespace KilobitCup.UI
 		/// </summary>
 		private void CreateHoldTimer()
 		{
-			characterTimer = new Timer(minimumHoldTime, time =>
+			characterTimer = new Timer(data.MinimumHoldTime, time =>
 			{
 				revealing = false;
 

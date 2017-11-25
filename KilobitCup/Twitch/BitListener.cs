@@ -108,7 +108,7 @@ namespace KilobitCup.Twitch
 			int bits = data["bits_used"].Value<int>();
 			int totalBits = data["total_bits_used"].Value<int>();
 
-			MessageSystem.Send(MessageTypes.Bits, new BitData(chatMessage, user, bits, totalBits));
+			MessageSystem.Send(MessageTypes.Bits, new BitData(user, chatMessage, bits, totalBits));
 		}
 	}
 }
